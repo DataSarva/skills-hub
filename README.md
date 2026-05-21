@@ -1,6 +1,6 @@
 # skills-hub
 
-Canonical Mac-Mini skills registry. One source of truth for every AI agent on this host — Claude Code, Codex CLI, Gemini CLI, Chakra/Hermes, OpenClaw, Pi, Feynman, and any future agent that follows the [SKILL.md open standard](https://www.thepromptindex.com/how-to-use-ai-agent-skills-the-complete-guide.html).
+Canonical Mac-Mini skills registry. One source of truth for every AI agent on this host — Claude Code, Codex CLI, Gemini CLI, Pi (chakra kernel adapter), Feynman, OpenClaw, and any future agent that follows the [SKILL.md open standard](https://www.thepromptindex.com/how-to-use-ai-agent-skills-the-complete-guide.html). Chakra itself is the Mac-Mini framework runtime (`~/.chakra/`) — it orchestrates pi/hermes/pustak as components and has no agent-level skill discovery path of its own.
 
 ## Why
 
@@ -32,7 +32,7 @@ After `skills-hub install` runs, **every** agent on this Mac Mini finds every ap
 | Claude Code | `~/.claude/skills/<name>/SKILL.md` | symlink per skill |
 | Codex CLI | `~/.codex/skills/<name>/SKILL.md` + `~/.agents/skills/` alias | symlink |
 | Gemini CLI | `~/.gemini/skills/<name>/SKILL.md` + `~/.agents/skills/` alias | symlink |
-| Chakra/Hermes/Pi | `~/.pi/agent/skills/<name>/SKILL.md` | symlink |
+| Pi (chakra kernel adapter) | `~/.pi/agent/skills/<name>/SKILL.md` | symlink |
 | Feynman | `~/.feynman/agent/skills/<name>/SKILL.md` | symlink |
 | OpenClaw | per project `.claude/skills/` or `~/.openclaw/skills/` | symlink |
 | Per-repo agents | `.agents/skills/<name>` | optional symlink farm |
