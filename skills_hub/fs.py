@@ -10,6 +10,7 @@ import os
 from pathlib import Path
 
 TIERS = ("general", "tools", "use-cases")
+DEFAULT_USE_CASES = ("investsarva", "pustak", "chakra", "memsarva", "pi", "feynman")
 
 _DEFAULT_HUB_NAME = ".skills-hub"
 
@@ -69,6 +70,22 @@ def skill_dir(tier: str, slug: str) -> Path:
     return tier_dir(tier) / slug
 
 
+def use_case_link_dir(name: str) -> Path:
+    """Return the hub symlink path for a use-case skill root."""
+    return skill_dir("use-cases", name)
+
+
+def use_case_root_dir(name: str) -> Path:
+    """Return the conventional use-case home directory."""
+    _validate_slug(name)
+    return _absolute(Path.home() / f".{name}")
+
+
+def use_case_skills_dir(name: str) -> Path:
+    """Return the conventional use-case skills directory."""
+    return use_case_root_dir(name) / "skills"
+
+
 def agent_target_dir(agent: str) -> Path:
     """Return the target skills directory for a known agent."""
     try:
@@ -81,4 +98,3 @@ def agent_target_dir(agent: str) -> Path:
 def cross_agent_alias_dir() -> Path:
     """Return the cross-agent alias directory."""
     return agent_target_dir("agents")
-

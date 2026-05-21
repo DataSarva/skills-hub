@@ -5,13 +5,11 @@ from __future__ import annotations
 import argparse
 from datetime import datetime, timezone
 import json
+import sys
 from pathlib import Path
 from typing import Sequence
 
-from . import fs
-from . import linker
-from . import migrator
-from . import scanner
+from . import fs, linker, migrator, scanner, use_cases
 
 _INDEX_NAME = "_index.json"
 _ATTIC_NAME = ".attic"
@@ -37,6 +35,29 @@ def _build_parser() -> argparse.ArgumentParser:
         metavar="SLUG=AGENT",
         help="resolve a divergent slug by picking an agent variant",
     )
+
+    use_case_parser = subparsers.add_parser(
+        "use-case", help="manage registered use-case skill roots"
+    )
+    use_case_subparsers = use_case_parser.add_subparsers(
+        dest="use_case_command", required=True
+    )
+
+    register_parser = use_case_subparsers.add_parser(
+        "register", help="register a use-case skill root"
+    )
+    register_parser.add_argument("name", help="use-case name")
+    register_parser.add_argument(
+        "--root", required=True, metavar="PATH", help="use-case skills root"
+    )
+
+    unregister_parser = use_case_subparsers.add_parser(
+        "unregister", help="unregister a use-case skill root"
+    )
+    unregister_parser.add_argument("name", help="use-case name")
+
+    use_case_subparsers.add_parser("list", help="list registered use cases")
+    use_case_subparsers.add_parser("discover", help="discover default use cases")
 
     return parser
 
@@ -174,6 +195,29 @@ def _run_migrate(args: argparse.Namespace) -> int:
     return 0
 
 
+def _use_case_command(args: argparse.Namespace) -> int:
+    try:
+        if args.use_case_command == "register":
+            use_cases.register(args.name, args.root)
+            return 0
+        if args.use_case_command == "unregister":
+            use_cases.unregister(args.name)
+            return 0
+        if args.use_case_command == "list":
+            for name, target in use_cases.list_registered().items():
+                print(f"{name}\t{target}")
+            return 0
+        if args.use_case_command == "discover":
+            for name in use_cases.discover():
+                print(name)
+            return 0
+    except (FileNotFoundError, NotADirectoryError, FileExistsError, ValueError, OSError) as exc:
+        print(f"error: {exc}", file=sys.stderr)
+        return 1
+
+    raise ValueError(f"unknown use-case command: {args.use_case_command!r}")
+
+
 def main(argv: Sequence[str] | None = None) -> int:
     parser = _build_parser()
     args = parser.parse_args(argv)
@@ -190,6 +234,9 @@ def main(argv: Sequence[str] | None = None) -> int:
             return _run_migrate(args)
         except ValueError as exc:
             parser.error(str(exc))
+
+    if args.command == "use-case":
+        return _use_case_command(args)
 
     parser.error(f"unknown command: {args.command}")
     return 2
