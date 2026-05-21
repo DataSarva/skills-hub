@@ -21,6 +21,12 @@ AGENTS = {
     "pi": ".pi/agent/skills",
     "feynman": ".feynman/agent/skills",
     "agents": ".agents/skills",
+    # Chakra framework runtime + chakra-bootstrapped use-case agents.
+    # Each has its own AGENTS.md instruction file alongside skills/, and
+    # runs on the hermes kernel. Hub installs general/tools symlinks into
+    # each so the chakra-side agent auto-finds every hub skill.
+    "chakra": ".chakra/skills",
+    "investsarva": ".investsarva/skills",
 }
 
 

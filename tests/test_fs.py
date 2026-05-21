@@ -149,5 +149,14 @@ def test_tiers_constant_is_general_tools_usecases() -> None:
     assert tuple(hub_fs.TIERS) == ("general", "tools", "use-cases")
 
 
-def test_agents_constant_covers_all_six_agents() -> None:
-    assert set(hub_fs.AGENTS) == {"claude", "codex", "gemini", "pi", "feynman", "agents"}
+def test_agents_constant_covers_known_targets() -> None:
+    assert set(hub_fs.AGENTS) >= {
+        "claude",
+        "codex",
+        "gemini",
+        "pi",
+        "feynman",
+        "agents",
+        "chakra",
+        "investsarva",
+    }

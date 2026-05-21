@@ -1,6 +1,6 @@
 ---
 name: skills-hub-author
-description: Use BEFORE creating, editing, or scaffolding any SKILL.md skill on this Mac Mini. All skills live in one canonical hub at ~/.skills-hub/ (symlink to ~/aisarva/skills-hub, github datasarva/skills-hub) so every agent (Claude Code, Codex CLI, Gemini CLI, Pi, Feynman, plus the cross-agent ~/.agents/skills/ alias) auto-discovers them. Do NOT scaffold skills directly under ~/.claude/skills/, ~/.codex/skills/, ~/.gemini/skills/, ~/.pi/agent/skills/, or ~/.feynman/agent/skills/ — those paths are hub-managed symlinks. Triggers on requests like "create a skill", "add a skill", "scaffold a skill", "write a new skill", "make a skill", "register this as a skill", or any invocation of skill-creator / write-a-skill / autoskill in this environment.
+description: Use BEFORE creating, editing, or scaffolding any SKILL.md skill on this Mac Mini. All skills live in one canonical hub at ~/.skills-hub/ (symlink to ~/aisarva/skills-hub, github datasarva/skills-hub). Every agent on this host auto-discovers hub skills via a symlink farm — the chakra framework runtime (~/.chakra/skills/), every chakra-bootstrapped use-case agent (~/.investsarva/skills/, future ~/.<usecase>/skills/), every CLI agent (~/.claude/skills/, ~/.codex/skills/, ~/.gemini/skills/), plus the cross-agent ~/.agents/skills/ open-standard alias. Do NOT scaffold a general skill directly under any of those paths — that creates a real dir alongside the symlink farm, defeating the hub. Triggers on "create a skill", "add a skill", "scaffold a skill", "write a new skill", "make a skill", "register this as a skill", or any invocation of skill-creator / write-a-skill / autoskill in this environment.
 tier: general
 tags: [meta, skills-hub, contributing]
 version: 1
@@ -19,7 +19,23 @@ The Mac Mini runs **skills-hub** — one canonical home for every SKILL.md skill
   - `tools/` — tied to a specific external CLI/SDK (claude-api, codex-cli, gemini-cli, google-cloud, openclaw, grok, …).
   - `use-cases/` — owned by a use-case root (`~/.investsarva/skills/`, etc.); registered via `skills-hub use-case register`.
 
-Each agent's native skill dir (`~/.claude/skills/`, `~/.codex/skills/`, `~/.gemini/skills/`, `~/.pi/agent/skills/`, `~/.feynman/agent/skills/`, `~/.agents/skills/`) contains symlinks back to the hub. **Editing files at those paths still edits the canonical hub file** — the symlink resolves to it — but the *creation* of a new skill must go through the hub CLI so the symlink farm + index get updated.
+Every agent's skill dir on this Mac Mini contains symlinks back to the hub:
+
+- **Chakra framework runtime:** `~/.chakra/skills/`
+- **Chakra-bootstrapped use-case agents:** `~/.investsarva/skills/` (plus future `~/.<usecase>/skills/`)
+- **CLI agents:** `~/.claude/skills/`, `~/.codex/skills/`, `~/.gemini/skills/`
+- **Cross-agent open-standard alias:** `~/.agents/skills/`
+
+**Editing files at those paths still edits the canonical hub file** — the symlink resolves to it — but the *creation* of a new skill must go through the hub CLI so the symlink farm + index get updated.
+
+### Use-case-owned vs hub-shared
+
+A chakra-bootstrapped agent (e.g. InvestSarva) typically holds two kinds of skills in its `skills/`:
+
+- **Use-case-owned** — real dirs (e.g. `price-watch`, `news-catalyst`). These belong to the agent and auto-expose into the hub via the use-case symlink at `~/.skills-hub/use-cases/<name>/`.
+- **Hub-installed** — symlinks. Every general/tools skill from the hub.
+
+If a skill is investsarva-specific (uses InvestSarva state/oauth), keep it under `~/.investsarva/skills/`. If any other agent could use it, put it in the hub `general/` or `tools/` tier.
 
 ## Adding a new skill
 
