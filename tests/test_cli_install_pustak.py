@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import os
 from pathlib import Path
 
 import pytest
@@ -28,16 +29,16 @@ def _seed_skill(hub: Path, tier: str, slug: str) -> None:
     (skill / "SKILL.md").write_text(SKILL_BODY.format(slug=slug, tier=tier), encoding="utf-8")
 
 
-def _seed_wiki(home: Path) -> Path:
-    wiki = home / ".pustak" / "wiki" / "general" / "tooling"
+def _seed_wiki() -> Path:
+    wiki = Path(os.environ["HOME"]) / ".pustak" / "wiki" / "general" / "tooling"
     wiki.mkdir(parents=True, exist_ok=True)
     return wiki
 
 
 def test_cli_install_calls_pustak_bridge(
-    tmp_hub_root: Path, tmp_home: Path, monkeypatch: pytest.MonkeyPatch
+    tmp_hub_root: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
-    _seed_wiki(tmp_home)
+    _seed_wiki()
     calls: list[Path] = []
 
     def _fake_mirror(hub_root: Path) -> int:
@@ -55,9 +56,9 @@ def test_cli_install_calls_pustak_bridge(
 
 
 def test_cli_sync_calls_pustak_bridge(
-    tmp_hub_root: Path, tmp_home: Path, monkeypatch: pytest.MonkeyPatch
+    tmp_hub_root: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
-    _seed_wiki(tmp_home)
+    _seed_wiki()
     calls: list[Path] = []
 
     def _fake_mirror(hub_root: Path) -> int:
@@ -78,9 +79,9 @@ def test_cli_sync_calls_pustak_bridge(
 
 
 def test_cli_install_no_pustak_flag_skips_bridge(
-    tmp_hub_root: Path, tmp_home: Path, monkeypatch: pytest.MonkeyPatch
+    tmp_hub_root: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
-    _seed_wiki(tmp_home)
+    _seed_wiki()
     calls: list[Path] = []
 
     def _fake_mirror(hub_root: Path) -> int:
@@ -98,9 +99,9 @@ def test_cli_install_no_pustak_flag_skips_bridge(
 
 
 def test_cli_sync_no_pustak_flag_skips_bridge(
-    tmp_hub_root: Path, tmp_home: Path, monkeypatch: pytest.MonkeyPatch
+    tmp_hub_root: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
-    _seed_wiki(tmp_home)
+    _seed_wiki()
     calls: list[Path] = []
 
     def _fake_mirror(hub_root: Path) -> int:
@@ -120,10 +121,10 @@ def test_cli_sync_no_pustak_flag_skips_bridge(
 
 
 def test_cli_install_bridge_failure_does_not_fail_command(
-    tmp_hub_root: Path, tmp_home: Path, monkeypatch: pytest.MonkeyPatch
+    tmp_hub_root: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
     """If the bridge encounters a system-level error, install still returns 0."""
-    _seed_wiki(tmp_home)
+    _seed_wiki()
 
     def _boom(_hub_root: Path) -> int:
         # Bridge contract: it absorbs its own errors and returns 0.

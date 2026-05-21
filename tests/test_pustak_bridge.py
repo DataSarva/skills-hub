@@ -11,6 +11,7 @@ The bridge:
 from __future__ import annotations
 
 import json
+import os
 import re
 from pathlib import Path
 
@@ -22,6 +23,10 @@ from skills_hub import pustak_bridge
 FIXTURES = Path(__file__).resolve().parent / "fixtures" / "pustak_bridge"
 
 
+def _home() -> Path:
+    return Path(os.environ["HOME"])
+
+
 def _seed_index(hub_root: Path) -> Path:
     hub_root.mkdir(parents=True, exist_ok=True)
     payload = (FIXTURES / "_index.json").read_text(encoding="utf-8")
@@ -30,8 +35,8 @@ def _seed_index(hub_root: Path) -> Path:
     return target
 
 
-def _seed_wiki_dir(home: Path) -> Path:
-    wiki = home / ".pustak" / "wiki" / "general" / "tooling"
+def _seed_wiki_dir() -> Path:
+    wiki = _home() / ".pustak" / "wiki" / "general" / "tooling"
     wiki.mkdir(parents=True, exist_ok=True)
     return wiki
 
@@ -109,10 +114,10 @@ class _Recorder:
 
 
 def test_mirror_index_invokes_pustak_cli(
-    tmp_hub_root: Path, tmp_home: Path, monkeypatch: pytest.MonkeyPatch
+    tmp_hub_root: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
     _seed_index(tmp_hub_root)
-    _seed_wiki_dir(tmp_home)
+    _seed_wiki_dir()
     recorder = _Recorder()
     monkeypatch.setattr(pustak_bridge.subprocess, "run", recorder)
 
@@ -131,10 +136,10 @@ def test_mirror_index_invokes_pustak_cli(
 
 
 def test_mirror_index_skips_when_pustak_missing(
-    tmp_hub_root: Path, tmp_home: Path, monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture
+    tmp_hub_root: Path, monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture
 ) -> None:
     _seed_index(tmp_hub_root)
-    _seed_wiki_dir(tmp_home)
+    _seed_wiki_dir()
 
     def _raise(*_args, **_kwargs):
         raise FileNotFoundError("pustak")
@@ -147,7 +152,7 @@ def test_mirror_index_skips_when_pustak_missing(
 
 
 def test_mirror_index_skips_when_wiki_dir_missing(
-    tmp_hub_root: Path, tmp_home: Path, monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture
+    tmp_hub_root: Path, monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture
 ) -> None:
     _seed_index(tmp_hub_root)
     # NOTE: do NOT create ~/.pustak/wiki/
@@ -163,10 +168,10 @@ def test_mirror_index_skips_when_wiki_dir_missing(
 
 
 def test_mirror_index_is_no_op_when_content_matches(
-    tmp_hub_root: Path, tmp_home: Path, monkeypatch: pytest.MonkeyPatch
+    tmp_hub_root: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
     _seed_index(tmp_hub_root)
-    wiki_dir = _seed_wiki_dir(tmp_home)
+    wiki_dir = _seed_wiki_dir()
     # Pre-seed the wiki page with the body the bridge would write — only
     # `version` and `last_updated` differ. Idempotency should skip the call.
     body = pustak_bridge.render_wiki_page(tmp_hub_root)
@@ -188,10 +193,10 @@ def test_mirror_index_is_no_op_when_content_matches(
 
 
 def test_mirror_index_writes_when_content_differs(
-    tmp_hub_root: Path, tmp_home: Path, monkeypatch: pytest.MonkeyPatch
+    tmp_hub_root: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
     _seed_index(tmp_hub_root)
-    wiki_dir = _seed_wiki_dir(tmp_home)
+    wiki_dir = _seed_wiki_dir()
     (wiki_dir / "skills-hub-index.md").write_text(
         "---\nslug: skills-hub-index\n---\n\nstale\n", encoding="utf-8"
     )

@@ -10,6 +10,7 @@ from pathlib import Path
 from typing import Sequence
 
 from . import doctor, fs, indexer, install as hub_install, linker, migrator, scanner
+from . import pustak_bridge
 from . import scaffolder, use_cases
 
 _INDEX_NAME = "_index.json"
@@ -60,8 +61,14 @@ def _build_parser() -> argparse.ArgumentParser:
     use_case_subparsers.add_parser("list", help="list registered use cases")
     use_case_subparsers.add_parser("discover", help="discover default use cases")
 
-    subparsers.add_parser("install", help="install hub skills into agent dirs")
-    subparsers.add_parser("sync", help="sync agent dirs with the hub")
+    install_parser = subparsers.add_parser("install", help="install hub skills into agent dirs")
+    install_parser.add_argument(
+        "--no-pustak", action="store_true", help="skip mirroring the index into Pustak"
+    )
+    sync_parser = subparsers.add_parser("sync", help="sync agent dirs with the hub")
+    sync_parser.add_argument(
+        "--no-pustak", action="store_true", help="skip mirroring the index into Pustak"
+    )
     subparsers.add_parser("uninstall", help="remove hub-managed agent links")
 
     list_parser = subparsers.add_parser("list", help="list indexed skills")
@@ -331,13 +338,17 @@ def _run_doctor() -> int:
     return 0 if report.is_ok() else 1
 
 
-def _run_install_command(command: str) -> int:
+def _run_install_command(command: str, *, mirror_pustak: bool = True) -> int:
     root = fs.hub_root()
     try:
         if command == "install":
             hub_install.install(root)
+            if mirror_pustak:
+                pustak_bridge.mirror_index(root)
         elif command == "sync":
             hub_install.sync(root)
+            if mirror_pustak:
+                pustak_bridge.mirror_index(root)
         elif command == "uninstall":
             hub_install.uninstall(root)
         else:
@@ -369,7 +380,8 @@ def main(argv: Sequence[str] | None = None) -> int:
         return _use_case_command(args)
 
     if args.command in {"install", "sync", "uninstall"}:
-        return _run_install_command(args.command)
+        mirror_pustak = not getattr(args, "no_pustak", False)
+        return _run_install_command(args.command, mirror_pustak=mirror_pustak)
 
     if args.command == "list":
         return _run_list(args)
