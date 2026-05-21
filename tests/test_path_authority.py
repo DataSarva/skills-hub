@@ -52,17 +52,27 @@ SKIP_DIRS = {
 
 def _iter_source_files() -> list[Path]:
     files: list[Path] = []
-    for path in REPO_ROOT.rglob("*"):
-        if not path.is_file():
+    # Guard scans production code under skills_hub/ plus the bin shim and
+    # pyproject. Tests are allowed to use literal paths in fixtures/assertions.
+    scan_roots = [
+        REPO_ROOT / "skills_hub",
+        REPO_ROOT / "bin",
+    ]
+    for root in scan_roots:
+        if not root.exists():
             continue
-        # Skip any path with a skip-dir component.
-        if any(part in SKIP_DIRS for part in path.parts):
-            continue
-        # Only check source-ish files.
-        if path.suffix in {".py", ".toml", ".sh", ".json"} or path.name in {
-            "skills-hub",
-        }:
-            files.append(path)
+        for path in root.rglob("*"):
+            if not path.is_file():
+                continue
+            if any(part in SKIP_DIRS for part in path.parts):
+                continue
+            if path.suffix in {".py", ".toml", ".sh", ".json"} or path.name in {
+                "skills-hub",
+            }:
+                files.append(path)
+    pyproject = REPO_ROOT / "pyproject.toml"
+    if pyproject.exists():
+        files.append(pyproject)
     return files
 
 

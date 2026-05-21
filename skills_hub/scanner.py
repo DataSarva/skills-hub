@@ -68,6 +68,8 @@ def scan_agents(home: Path | None = None) -> list[AgentSkill]:
         if not root.exists() or not root.is_dir() or root.is_symlink():
             continue
         for child in sorted(root.iterdir(), key=lambda path: path.name):
+            if child.name.startswith("."):
+                continue
             if child.is_symlink() or not child.is_dir() or not _is_valid_slug(child.name):
                 continue
             snapshot.append(

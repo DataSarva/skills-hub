@@ -1,0 +1,26 @@
+{
+  "version": 1,
+  "skills": [
+    {
+      "slug": "caveman",
+      "tier": "general",
+      "name": "caveman",
+      "description": "Ultra-compressed communication mode.",
+      "tags": ["communication", "tokens"]
+    },
+    {
+      "slug": "investsarva-dashboard-architecture",
+      "tier": "use-cases",
+      "name": "investsarva-dashboard-architecture",
+      "description": "Architecture reference for the dashboard.",
+      "tags": []
+    },
+    {
+      "slug": "release-peekaboo",
+      "tier": "tools",
+      "name": "release-peekaboo",
+      "description": "Release helper for peekaboo.",
+      "tags": ["release"]
+    }
+  ]
+}
