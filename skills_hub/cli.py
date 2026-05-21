@@ -9,7 +9,8 @@ import sys
 from pathlib import Path
 from typing import Sequence
 
-from . import fs, linker, migrator, scanner, use_cases
+from . import doctor, fs, indexer, install as hub_install, linker, migrator, scanner
+from . import scaffolder, use_cases
 
 _INDEX_NAME = "_index.json"
 _ATTIC_NAME = ".attic"
@@ -58,6 +59,30 @@ def _build_parser() -> argparse.ArgumentParser:
 
     use_case_subparsers.add_parser("list", help="list registered use cases")
     use_case_subparsers.add_parser("discover", help="discover default use cases")
+
+    subparsers.add_parser("install", help="install hub skills into agent dirs")
+    subparsers.add_parser("sync", help="sync agent dirs with the hub")
+    subparsers.add_parser("uninstall", help="remove hub-managed agent links")
+
+    list_parser = subparsers.add_parser("list", help="list indexed skills")
+    list_parser.add_argument("--tier", choices=fs.TIERS, help="filter by tier")
+    list_parser.add_argument("--tag", action="append", default=[], help="filter by tag")
+
+    show_parser = subparsers.add_parser("show", help="show one indexed skill")
+    show_parser.add_argument("slug", help="skill slug")
+
+    search_parser = subparsers.add_parser("search", help="search indexed skills")
+    search_parser.add_argument("query", help="search query")
+
+    new_parser = subparsers.add_parser("new", help="scaffold a new skill")
+    new_parser.add_argument("slug", help="skill slug")
+    new_parser.add_argument("--tier", required=True, choices=fs.TIERS, help="skill tier")
+    new_parser.add_argument("--description", default="", help="frontmatter description")
+    new_parser.add_argument("--name", help="frontmatter name")
+    new_parser.add_argument("--tag", action="append", default=[], help="frontmatter tag")
+    new_parser.add_argument("--version", type=int, default=1, help="frontmatter version")
+
+    subparsers.add_parser("doctor", help="check installed hub links")
 
     return parser
 
@@ -218,6 +243,111 @@ def _use_case_command(args: argparse.Namespace) -> int:
     raise ValueError(f"unknown use-case command: {args.use_case_command!r}")
 
 
+def _format_entry(entry: indexer.Entry) -> str:
+    tags = ",".join(entry.tags)
+    return f"{entry.tier}\t{entry.slug}\t{tags}\t{entry.description}"
+
+
+def _run_list(args: argparse.Namespace) -> int:
+    entries = indexer.build_index(fs.hub_root()).entries
+    if args.tier:
+        entries = [entry for entry in entries if entry.tier == args.tier]
+    for tag in args.tag:
+        entries = [entry for entry in entries if tag in entry.tags]
+    for entry in entries:
+        print(_format_entry(entry))
+    return 0
+
+
+def _entry_by_slug(slug: str) -> indexer.Entry | None:
+    for entry in indexer.build_index(fs.hub_root()).entries:
+        if entry.slug == slug:
+            return entry
+    return None
+
+
+def _run_show(args: argparse.Namespace) -> int:
+    entry = _entry_by_slug(args.slug)
+    if entry is None:
+        print(f"error: unknown skill: {args.slug}", file=sys.stderr)
+        return 1
+
+    print(f"slug: {entry.slug}")
+    print(f"tier: {entry.tier}")
+    print(f"name: {entry.name}")
+    print(f"description: {entry.description}")
+    print(f"tags: [{', '.join(entry.tags)}]")
+    print(f"version: {entry.version}")
+    print(f"sha: {entry.sha}")
+    print(f"path: {entry.path}")
+    print("installed:")
+    target = entry.path.resolve(strict=False)
+    for agent in fs.AGENTS:
+        agent_dir = fs.agent_target_dir(agent)
+        link = agent_dir / entry.slug
+        if link.is_symlink() and link.resolve(strict=False) == target:
+            print(f"  {agent}: {agent_dir}")
+    return 0
+
+
+def _matches(entry: indexer.Entry, query: str) -> bool:
+    haystack = " ".join(
+        [entry.slug, entry.tier, entry.name, entry.description, *entry.tags]
+    ).lower()
+    return query.lower() in haystack
+
+
+def _run_search(args: argparse.Namespace) -> int:
+    for entry in indexer.build_index(fs.hub_root()).entries:
+        if _matches(entry, args.query):
+            print(_format_entry(entry))
+    return 0
+
+
+def _run_new(args: argparse.Namespace) -> int:
+    try:
+        path = scaffolder.scaffold_skill(
+            fs.hub_root(),
+            args.slug,
+            args.tier,
+            description=args.description,
+            name=args.name,
+            tags=args.tag,
+            version=args.version,
+        )
+    except (FileExistsError, ValueError, OSError) as exc:
+        print(f"error: {exc}", file=sys.stderr)
+        return 1
+    print(path)
+    return 0
+
+
+def _run_doctor() -> int:
+    report = doctor.check_health(fs.hub_root())
+    for path in report.broken:
+        print(f"broken: {path}")
+    for path in report.non_symlink:
+        print(f"non-symlink: {path}")
+    return 0 if report.is_ok() else 1
+
+
+def _run_install_command(command: str) -> int:
+    root = fs.hub_root()
+    try:
+        if command == "install":
+            hub_install.install(root)
+        elif command == "sync":
+            hub_install.sync(root)
+        elif command == "uninstall":
+            hub_install.uninstall(root)
+        else:
+            raise ValueError(f"unknown install command: {command!r}")
+    except (FileExistsError, ValueError, OSError) as exc:
+        print(f"error: {exc}", file=sys.stderr)
+        return 1
+    return 0
+
+
 def main(argv: Sequence[str] | None = None) -> int:
     parser = _build_parser()
     args = parser.parse_args(argv)
@@ -237,6 +367,24 @@ def main(argv: Sequence[str] | None = None) -> int:
 
     if args.command == "use-case":
         return _use_case_command(args)
+
+    if args.command in {"install", "sync", "uninstall"}:
+        return _run_install_command(args.command)
+
+    if args.command == "list":
+        return _run_list(args)
+
+    if args.command == "show":
+        return _run_show(args)
+
+    if args.command == "search":
+        return _run_search(args)
+
+    if args.command == "new":
+        return _run_new(args)
+
+    if args.command == "doctor":
+        return _run_doctor()
 
     parser.error(f"unknown command: {args.command}")
     return 2
