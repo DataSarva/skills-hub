@@ -1,0 +1,47 @@
+{
+  "_comment": "Three caption skeletons. Pick one, fill placeholders, pass via --caption-file. Fields story_slug + music_credit are internal-only and stripped by build_caption().",
+  "telugu_riddle": {
+    "story_slug": "<YYYY-MM-DD>-<slug>",
+    "logline": "పొడుపు కథ: <riddle one-liner>. <emoji>",
+    "hashtags": [
+      "#Telugu",
+      "#TeluguRiddles",
+      "#PodupuKathalu",
+      "#FolkRiddle",
+      "#<topic-tag>"
+    ],
+    "music_credit": "<soundcloud track + license> (internal-only)"
+  },
+  "english_short": {
+    "story_slug": "<YYYY-MM-DD>-<slug>",
+    "logline": "<one-line hook that lands the joke or insight>",
+    "hashtags": [
+      "#<niche>",
+      "#<subniche>",
+      "#shorts",
+      "#reels",
+      "#viral"
+    ],
+    "music_credit": "<credit if cc-by> (internal-only)"
+  },
+  "growth_heavy_hashtags": {
+    "_note": "Use sparingly — IG penalises spammy tag walls. Keep total <=15.",
+    "story_slug": "<YYYY-MM-DD>-<slug>",
+    "logline": "<short hook>.\n\n<2-3 sentence story>.\n\nFollow for more.",
+    "hashtags": [
+      "#<primary-niche>",
+      "#<secondary-niche>",
+      "#<tertiary>",
+      "#<format-tag>",
+      "#<region-tag>",
+      "#<language-tag>",
+      "#<topic1>",
+      "#<topic2>",
+      "#viralreels",
+      "#explorepage",
+      "#trending",
+      "#instadaily"
+    ],
+    "music_credit": "(internal-only)"
+  }
+}
