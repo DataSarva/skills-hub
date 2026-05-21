@@ -1,0 +1,26 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "skills-hub"
+version = "0.1.0"
+description = "Canonical Mac-Mini skills registry — path authority + CLI."
+readme = "README.md"
+requires-python = ">=3.12"
+license = { text = "MIT" }
+authors = [{ name = "DataSarva" }]
+dependencies = []
+
+[project.optional-dependencies]
+dev = ["pytest>=8"]
+
+[project.scripts]
+skills-hub = "skills_hub.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["skills_hub"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"
