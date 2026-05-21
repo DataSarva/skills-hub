@@ -7,6 +7,7 @@ __all__ = [
     "install",
     "linker",
     "migrator",
+    "pustak_bridge",
     "scanner",
     "scaffolder",
     "use_cases",
