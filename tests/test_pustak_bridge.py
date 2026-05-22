@@ -118,6 +118,11 @@ def test_mirror_index_invokes_pustak_cli(
 ) -> None:
     _seed_index(tmp_hub_root)
     _seed_wiki_dir()
+    # Force PATH-pustak path so test is independent of host filesystem.
+    monkeypatch.delenv("PUSTAK_REPO", raising=False)
+    monkeypatch.setattr(
+        pustak_bridge.shutil, "which", lambda name: "/usr/local/bin/pustak"
+    )
     recorder = _Recorder()
     monkeypatch.setattr(pustak_bridge.subprocess, "run", recorder)
 
@@ -140,6 +145,11 @@ def test_mirror_index_skips_when_pustak_missing(
 ) -> None:
     _seed_index(tmp_hub_root)
     _seed_wiki_dir()
+    # Force PATH-pustak path so the subprocess raise is exercised.
+    monkeypatch.delenv("PUSTAK_REPO", raising=False)
+    monkeypatch.setattr(
+        pustak_bridge.shutil, "which", lambda name: "/usr/local/bin/pustak"
+    )
 
     def _raise(*_args, **_kwargs):
         raise FileNotFoundError("pustak")
@@ -200,6 +210,10 @@ def test_mirror_index_writes_when_content_differs(
     (wiki_dir / "skills-hub-index.md").write_text(
         "---\nslug: skills-hub-index\n---\n\nstale\n", encoding="utf-8"
     )
+    monkeypatch.delenv("PUSTAK_REPO", raising=False)
+    monkeypatch.setattr(
+        pustak_bridge.shutil, "which", lambda name: "/usr/local/bin/pustak"
+    )
 
     recorder = _Recorder()
     monkeypatch.setattr(pustak_bridge.subprocess, "run", recorder)
@@ -207,3 +221,153 @@ def test_mirror_index_writes_when_content_differs(
     rc = pustak_bridge.mirror_index(tmp_hub_root)
     assert rc == 0
     assert len(recorder.calls) == 1
+
+
+# ---------------------------------------------------------------------------
+# S7: pustak invocation via `uv run pustak …` from the local pustak repo
+# ---------------------------------------------------------------------------
+
+
+def _seed_pustak_repo(root: Path) -> Path:
+    """Create a fake pustak repo directory with a pyproject.toml marker."""
+    root.mkdir(parents=True, exist_ok=True)
+    (root / "pyproject.toml").write_text(
+        "[project]\nname = \"pustak\"\n", encoding="utf-8"
+    )
+    return root
+
+
+def test_mirror_index_uses_uv_run_when_pustak_repo_env_set(
+    tmp_hub_root: Path, tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """PUSTAK_REPO points at a uv-managed repo → invoke `uv run pustak …`."""
+    _seed_index(tmp_hub_root)
+    _seed_wiki_dir()
+    pustak_repo = _seed_pustak_repo(tmp_path / "pustak-repo")
+    monkeypatch.setenv("PUSTAK_REPO", str(pustak_repo))
+
+    recorder = _Recorder()
+    monkeypatch.setattr(pustak_bridge.subprocess, "run", recorder)
+
+    rc = pustak_bridge.mirror_index(tmp_hub_root)
+
+    assert rc == 0
+    assert recorder.calls, "expected subprocess to be invoked"
+    call = recorder.calls[0]
+    cmd = call["cmd"]
+    # Args: ["uv", "run", "pustak", "wiki", "write", ...]
+    assert cmd[0] == "uv"
+    assert cmd[1] == "run"
+    assert cmd[2] == "pustak"
+    assert "wiki" in cmd
+    assert "write" in cmd
+    # cwd must be the repo (uv requires it).
+    cwd = call["kwargs"].get("cwd")
+    assert cwd is not None, "uv invocation must set cwd"
+    assert str(cwd) == str(pustak_repo)
+
+
+def test_mirror_index_defaults_to_aisarva_pustak_when_env_unset(
+    tmp_hub_root: Path, tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """When PUSTAK_REPO is unset, the default helper resolves to ~/aisarva/pustak."""
+    _seed_index(tmp_hub_root)
+    _seed_wiki_dir()
+    monkeypatch.delenv("PUSTAK_REPO", raising=False)
+
+    # Create the default location under the tmp HOME so it "exists".
+    home = Path(os.environ["HOME"])
+    default_repo = home / "aisarva" / "pustak"
+    _seed_pustak_repo(default_repo)
+
+    # Sanity: the fs helper must exist and resolve to this path.
+    from skills_hub import fs as _fs
+
+    assert hasattr(_fs, "pustak_repo_dir"), (
+        "fs.py must expose pustak_repo_dir() as the path authority"
+    )
+    assert _fs.pustak_repo_dir() == default_repo
+
+    recorder = _Recorder()
+    monkeypatch.setattr(pustak_bridge.subprocess, "run", recorder)
+
+    rc = pustak_bridge.mirror_index(tmp_hub_root)
+
+    assert rc == 0
+    assert recorder.calls, "expected subprocess to be invoked when default repo exists"
+    call = recorder.calls[0]
+    assert call["cmd"][:3] == ["uv", "run", "pustak"]
+    assert str(call["kwargs"].get("cwd")) == str(default_repo)
+
+
+def test_mirror_index_falls_back_to_path_pustak_when_repo_missing(
+    tmp_hub_root: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """No PUSTAK_REPO + default dir missing → fall back to bare `pustak` on PATH."""
+    _seed_index(tmp_hub_root)
+    _seed_wiki_dir()
+    monkeypatch.delenv("PUSTAK_REPO", raising=False)
+    # tmp HOME has no ~/aisarva/pustak.
+
+    # Pretend `pustak` is discoverable on PATH.
+    monkeypatch.setattr(
+        pustak_bridge.shutil, "which", lambda name: "/usr/local/bin/pustak"
+    )
+
+    recorder = _Recorder()
+    monkeypatch.setattr(pustak_bridge.subprocess, "run", recorder)
+
+    rc = pustak_bridge.mirror_index(tmp_hub_root)
+
+    assert rc == 0
+    assert recorder.calls, "expected fallback to PATH pustak"
+    cmd = recorder.calls[0]["cmd"]
+    assert cmd[0] == "pustak"
+    assert "wiki" in cmd
+    assert "write" in cmd
+    # No cwd for PATH binary.
+    assert recorder.calls[0]["kwargs"].get("cwd") is None
+
+
+def test_mirror_index_warns_when_neither_repo_nor_path_pustak(
+    tmp_hub_root: Path, monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture
+) -> None:
+    """Neither PUSTAK_REPO, default dir, nor PATH pustak → warn + exit 0, no call."""
+    _seed_index(tmp_hub_root)
+    _seed_wiki_dir()
+    monkeypatch.delenv("PUSTAK_REPO", raising=False)
+    monkeypatch.setattr(pustak_bridge.shutil, "which", lambda name: None)
+
+    recorder = _Recorder()
+    monkeypatch.setattr(pustak_bridge.subprocess, "run", recorder)
+
+    rc = pustak_bridge.mirror_index(tmp_hub_root)
+
+    assert rc == 0
+    assert recorder.calls == [], "must not invoke subprocess when nothing found"
+    captured = capsys.readouterr()
+    assert "pustak cli not found" in (captured.err + captured.out).lower()
+
+
+def test_mirror_index_env_var_to_dir_without_pyproject_falls_back(
+    tmp_hub_root: Path, tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """PUSTAK_REPO points at a dir lacking pyproject.toml → not a real uv repo,
+    fall back to PATH binary if present."""
+    _seed_index(tmp_hub_root)
+    _seed_wiki_dir()
+    bogus = tmp_path / "not-a-pustak-repo"
+    bogus.mkdir()
+    monkeypatch.setenv("PUSTAK_REPO", str(bogus))
+    monkeypatch.setattr(
+        pustak_bridge.shutil, "which", lambda name: "/usr/local/bin/pustak"
+    )
+
+    recorder = _Recorder()
+    monkeypatch.setattr(pustak_bridge.subprocess, "run", recorder)
+
+    rc = pustak_bridge.mirror_index(tmp_hub_root)
+
+    assert rc == 0
+    assert recorder.calls, "expected PATH fallback when env-pointed dir lacks pyproject"
+    assert recorder.calls[0]["cmd"][0] == "pustak"
