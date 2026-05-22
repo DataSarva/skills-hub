@@ -89,7 +89,10 @@ def _build_parser() -> argparse.ArgumentParser:
     new_parser.add_argument("--tag", action="append", default=[], help="frontmatter tag")
     new_parser.add_argument("--version", type=int, default=1, help="frontmatter version")
 
-    subparsers.add_parser("doctor", help="check installed hub links")
+    doctor_parser = subparsers.add_parser("doctor", help="check installed hub links")
+    doctor_parser.add_argument(
+        "--verbose", action="store_true", help="show informational owned entries"
+    )
 
     return parser
 
@@ -329,12 +332,15 @@ def _run_new(args: argparse.Namespace) -> int:
     return 0
 
 
-def _run_doctor() -> int:
+def _run_doctor(args: argparse.Namespace) -> int:
     report = doctor.check_health(fs.hub_root())
     for path in report.broken:
         print(f"broken: {path}")
     for path in report.non_symlink:
         print(f"non-symlink: {path}")
+    if args.verbose:
+        for path in report.owned:
+            print(f"owned: {path}")
     return 0 if report.is_ok() else 1
 
 
@@ -403,7 +409,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         return _run_new(args)
 
     if args.command == "doctor":
-        return _run_doctor()
+        return _run_doctor(args)
 
     parser.error(f"unknown command: {args.command}")
     return 2
