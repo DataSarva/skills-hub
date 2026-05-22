@@ -338,10 +338,17 @@ def _run_doctor() -> int:
     return 0 if report.is_ok() else 1
 
 
+def _print_discovered_chakra_agents() -> None:
+    discovered = fs.discover_chakra_agents()
+    names = ", ".join(sorted(discovered)) if discovered else "(none)"
+    print(f"discovered chakra agents: {names}")
+
+
 def _run_install_command(command: str, *, mirror_pustak: bool = True) -> int:
     root = fs.hub_root()
     try:
         if command == "install":
+            _print_discovered_chakra_agents()
             hub_install.install(root)
             if mirror_pustak:
                 pustak_bridge.mirror_index(root)

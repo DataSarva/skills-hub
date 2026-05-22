@@ -29,6 +29,8 @@ AGENTS = {
     "investsarva": ".investsarva/skills",
 }
 
+_CHAKRA_DISCOVERY_EXCLUDES = {"skills-hub", "pustak"}
+
 
 def _absolute(path: Path) -> Path:
     path = path.expanduser()
@@ -98,6 +100,48 @@ def use_case_root_dir(name: str) -> Path:
 def use_case_skills_dir(name: str) -> Path:
     """Return the conventional use-case skills directory."""
     return use_case_root_dir(name) / "skills"
+
+
+def discover_chakra_agents() -> dict[str, str]:
+    """Discover chakra-shaped agent homes directly under HOME."""
+    home = Path.home()
+    static_targets = {
+        _absolute(home / suffix).resolve(strict=False) for suffix in AGENTS.values()
+    }
+    discovered: dict[str, str] = {}
+
+    try:
+        children = sorted(home.iterdir(), key=lambda path: path.name)
+    except FileNotFoundError:
+        return discovered
+
+    for child in children:
+        if child.is_symlink():
+            continue
+        if not child.is_dir():
+            continue
+        if not child.name.startswith("."):
+            continue
+
+        name = child.name.lstrip(".")
+        if (
+            not name
+            or name in _CHAKRA_DISCOVERY_EXCLUDES
+            or name in AGENTS
+        ):
+            continue
+
+        skills_dir = child / "skills"
+        if skills_dir.resolve(strict=False) in static_targets:
+            continue
+        if not (child / "AGENTS.md").is_file():
+            continue
+        if not skills_dir.is_dir():
+            continue
+
+        discovered[name] = f".{name}/skills"
+
+    return discovered
 
 
 def agent_target_dir(agent: str) -> Path:

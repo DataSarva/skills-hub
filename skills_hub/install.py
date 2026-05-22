@@ -28,8 +28,21 @@ def _write_index(root: Path, index: indexer.Index) -> None:
     (root / _INDEX_NAME).write_text(f"{payload}\n", encoding="utf-8")
 
 
+def _agents() -> dict[str, str]:
+    discovered = {
+        agent: suffix
+        for agent, suffix in fs.discover_chakra_agents().items()
+        if agent not in fs.AGENTS
+    }
+    return fs.AGENTS | discovered
+
+
+def _agent_target_dir(suffix: str) -> Path:
+    return Path.home() / suffix
+
+
 def _agent_dirs() -> list[Path]:
-    return [fs.agent_target_dir(agent) for agent in fs.AGENTS]
+    return [_agent_target_dir(suffix) for suffix in _agents().values()]
 
 
 def _agent_children() -> list[Path]:
@@ -56,9 +69,10 @@ def install(hub_root: str | Path) -> indexer.Index:
     """Install every indexed skill into every known agent directory."""
     root = _hub_root(hub_root)
     index = indexer.build_index(root)
+    agents = _agents()
     for entry in index.entries:
-        for agent in fs.AGENTS:
-            linker.write_symlink(entry.path, fs.agent_target_dir(agent) / entry.slug)
+        for suffix in agents.values():
+            linker.write_symlink(entry.path, _agent_target_dir(suffix) / entry.slug)
     _write_index(root, index)
     return index
 
