@@ -149,3 +149,82 @@ def test_cli_uninstall_subcommand(tmp_hub_root: Path) -> None:
     rc = hub_cli.main(["uninstall"])
     assert rc == 0
     assert not (hub_fs.agent_target_dir("claude") / "caveman").exists()
+
+
+# ---------------------------------------------------------------------------
+# Dynamic chakra discovery: install fans out into discovered chakra agents
+# ---------------------------------------------------------------------------
+
+
+def _make_chakra_home(home: Path, name: str) -> Path:
+    root = home / f".{name}"
+    root.mkdir()
+    (root / "AGENTS.md").write_text(f"# {name}\n", encoding="utf-8")
+    (root / "skills").mkdir()
+    return root
+
+
+def test_install_fans_out_into_discovered_chakra_agent(tmp_hub_root: Path) -> None:
+    """A new chakra-shaped dir at ~/.newchakra/ gets the symlink farm on install."""
+    home = Path(hub_fs.agent_target_dir("claude")).parent.parent  # ~/.claude/skills -> ~
+    _make_chakra_home(home, "newchakra")
+
+    hub_cli.main(["init"])
+    _seed_minimal_hub(tmp_hub_root)
+    hub_install.install(tmp_hub_root)
+
+    skills_dir = home / ".newchakra" / "skills"
+    link = skills_dir / "caveman"
+    assert link.is_symlink(), f"missing fan-out for newchakra: {link}"
+    assert link.resolve() == (tmp_hub_root / "general" / "caveman").resolve()
+
+
+def test_install_does_not_double_install_for_static_agents(tmp_hub_root: Path) -> None:
+    """If a name is in static AGENTS, discovery must not add a second entry."""
+    home = Path(hub_fs.agent_target_dir("claude")).parent.parent
+    # Build a chakra-shaped `.investsarva/` (in static AGENTS already).
+    _make_chakra_home(home, "investsarva")
+
+    hub_cli.main(["init"])
+    _seed_minimal_hub(tmp_hub_root)
+    hub_install.install(tmp_hub_root)
+
+    discovered = hub_fs.discover_chakra_agents()
+    assert "investsarva" not in discovered
+
+
+def test_install_handles_removed_chakra_without_error(tmp_hub_root: Path) -> None:
+    """Deleting a discovered chakra dir + re-running install must not error."""
+    home = Path(hub_fs.agent_target_dir("claude")).parent.parent
+    chakra_root = _make_chakra_home(home, "ephemeral")
+
+    hub_cli.main(["init"])
+    _seed_minimal_hub(tmp_hub_root)
+    hub_install.install(tmp_hub_root)
+    assert (chakra_root / "skills" / "caveman").is_symlink()
+
+    # Remove the chakra dir entirely.
+    import shutil
+    shutil.rmtree(chakra_root)
+
+    # Reinstall must not raise.
+    hub_install.install(tmp_hub_root)
+    # And the static agents are still intact.
+    assert (hub_fs.agent_target_dir("claude") / "caveman").is_symlink()
+
+
+def test_cli_install_prints_discovered_chakra_agents(
+    tmp_hub_root: Path, capsys: pytest.CaptureFixture[str]
+) -> None:
+    """`skills-hub install` prints discovered chakra agents at the top."""
+    home = Path(hub_fs.agent_target_dir("claude")).parent.parent
+    _make_chakra_home(home, "newchakra")
+
+    hub_cli.main(["init"])
+    _seed_minimal_hub(tmp_hub_root)
+    capsys.readouterr()  # drain init/seed output
+
+    rc = hub_cli.main(["install"])
+    assert rc == 0
+    out = capsys.readouterr().out
+    assert "newchakra" in out

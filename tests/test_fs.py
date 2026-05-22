@@ -160,3 +160,110 @@ def test_agents_constant_covers_known_targets() -> None:
         "chakra",
         "investsarva",
     }
+
+
+# ---------------------------------------------------------------------------
+# discover_chakra_agents()
+# ---------------------------------------------------------------------------
+
+
+def _make_chakra(home: Path, name: str) -> Path:
+    """Create a chakra-shaped dir at ~/.<name>/ with AGENTS.md + skills/."""
+    root = home / f".{name}"
+    root.mkdir()
+    (root / "AGENTS.md").write_text(f"# {name}\n", encoding="utf-8")
+    (root / "skills").mkdir()
+    return root
+
+
+def test_discover_returns_chakra_shaped_dirs(tmp_home: Path) -> None:
+    """A dir with both AGENTS.md and skills/ is discovered."""
+    _make_chakra(tmp_home, "newchakra")
+    result = hub_fs.discover_chakra_agents()
+    assert "newchakra" in result
+    assert result["newchakra"] == ".newchakra/skills"
+
+
+def test_discover_excludes_dirs_missing_agents_md(tmp_home: Path) -> None:
+    root = tmp_home / ".halfchakra"
+    root.mkdir()
+    (root / "skills").mkdir()  # has skills/ but no AGENTS.md
+    result = hub_fs.discover_chakra_agents()
+    assert "halfchakra" not in result
+
+
+def test_discover_excludes_dirs_missing_skills(tmp_home: Path) -> None:
+    root = tmp_home / ".halfchakra2"
+    root.mkdir()
+    (root / "AGENTS.md").write_text("hi", encoding="utf-8")  # missing skills/
+    result = hub_fs.discover_chakra_agents()
+    assert "halfchakra2" not in result
+
+
+def test_discover_excludes_static_agent_names_by_name(tmp_home: Path) -> None:
+    """Even if `.claude/` happens to be chakra-shaped, it's excluded by name."""
+    for name in ("claude", "codex", "gemini", "chakra", "investsarva"):
+        _make_chakra(tmp_home, name)
+    result = hub_fs.discover_chakra_agents()
+    assert "claude" not in result
+    assert "codex" not in result
+    assert "gemini" not in result
+    assert "chakra" not in result
+    assert "investsarva" not in result
+
+
+def test_discover_excludes_pustak_and_skills_hub(tmp_home: Path) -> None:
+    _make_chakra(tmp_home, "pustak")
+    _make_chakra(tmp_home, "skills-hub")
+    result = hub_fs.discover_chakra_agents()
+    assert "pustak" not in result
+    assert "skills-hub" not in result
+
+
+def test_discover_skips_non_dirs(tmp_home: Path) -> None:
+    (tmp_home / ".afile").write_text("x", encoding="utf-8")
+    result = hub_fs.discover_chakra_agents()
+    assert ".afile" not in result
+    assert "afile" not in result
+
+
+def test_discover_skips_symlink_children(tmp_home: Path, tmp_path: Path) -> None:
+    real = tmp_path / "real-chakra"
+    real.mkdir()
+    (real / "AGENTS.md").write_text("x", encoding="utf-8")
+    (real / "skills").mkdir()
+    link = tmp_home / ".linkedchakra"
+    link.symlink_to(real, target_is_directory=True)
+    result = hub_fs.discover_chakra_agents()
+    assert "linkedchakra" not in result
+
+
+def test_discover_does_not_recurse(tmp_home: Path) -> None:
+    nested_parent = tmp_home / ".outer"
+    nested_parent.mkdir()
+    (nested_parent / "AGENTS.md").write_text("outer", encoding="utf-8")
+    skills_dir = nested_parent / "skills"
+    skills_dir.mkdir()
+    # Place a chakra-shaped dir nested inside — must NOT be discovered.
+    nested = nested_parent / "nestedchakra"
+    nested.mkdir()
+    (nested / "AGENTS.md").write_text("x", encoding="utf-8")
+    (nested / "skills").mkdir()
+    result = hub_fs.discover_chakra_agents()
+    assert "nestedchakra" not in result
+    # outer itself is dotted at HOME level and qualifies.
+    assert "outer" in result
+
+
+def test_discover_excludes_non_dotted_children(tmp_home: Path) -> None:
+    """Top-level non-dotted dirs are not chakra agents."""
+    root = tmp_home / "plain"
+    root.mkdir()
+    (root / "AGENTS.md").write_text("x", encoding="utf-8")
+    (root / "skills").mkdir()
+    result = hub_fs.discover_chakra_agents()
+    assert "plain" not in result
+
+
+def test_discover_returns_empty_for_empty_home(tmp_home: Path) -> None:
+    assert hub_fs.discover_chakra_agents() == {}
