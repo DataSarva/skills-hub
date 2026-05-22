@@ -63,6 +63,14 @@ def hub_root() -> Path:
     return _absolute(Path.home() / _DEFAULT_HUB_NAME)
 
 
+def pustak_repo_dir() -> Path:
+    """Return the local Pustak repository path."""
+    raw_repo = os.environ.get("PUSTAK_REPO")
+    if raw_repo:
+        return _absolute(Path(raw_repo))
+    return _absolute(Path.home() / "aisarva" / "pustak")
+
+
 def tier_dir(tier: str) -> Path:
     """Return the directory for a known tier."""
     _validate_tier(tier)
