@@ -6,10 +6,13 @@ from datetime import UTC, datetime
 import json
 from pathlib import Path
 import re
+import shutil
 import subprocess
 import sys
 from tempfile import TemporaryDirectory
 from typing import Any
+
+from skills_hub import fs
 
 _INDEX_NAME = "_index.json"
 _NAMESPACE = "general/tooling"
@@ -124,13 +127,15 @@ def _matches_existing(rendered: str, page_path: Path) -> bool:
     return _comparable(existing) == _comparable(rendered)
 
 
-def _write_with_pustak(rendered: str, page_path: Path) -> int:
+def _write_with_pustak(
+    rendered: str, page_path: Path, cmd: list[str], cwd: str | None
+) -> int:
     with TemporaryDirectory(prefix="skills-hub-pustak-") as temp_dir:
         content_file = Path(temp_dir) / _PAGE_NAME
         content_file.write_text(rendered, encoding="utf-8")
         result = subprocess.run(
             [
-                "pustak",
+                *cmd,
                 "wiki",
                 "write",
                 str(page_path),
@@ -145,6 +150,7 @@ def _write_with_pustak(rendered: str, page_path: Path) -> int:
             check=False,
             capture_output=True,
             text=True,
+            cwd=cwd,
         )
     if result.returncode != 0:
         stderr = result.stderr.strip()
@@ -178,8 +184,19 @@ def mirror_index(hub_root: str | Path) -> int:
     except OSError as exc:
         _warn(f"could not read existing pustak page: {exc}")
 
+    repo = fs.pustak_repo_dir()
+    if repo.is_dir() and (repo / "pyproject.toml").is_file():
+        cmd = ["uv", "run", "pustak"]
+        cwd = str(repo)
+    elif shutil.which("pustak"):
+        cmd = ["pustak"]
+        cwd = None
+    else:
+        _warn("pustak CLI not found; skipping wiki mirror")
+        return 0
+
     try:
-        return _write_with_pustak(rendered, page_path)
+        return _write_with_pustak(rendered, page_path, cmd, cwd)
     except FileNotFoundError:
         _warn("pustak CLI not found; skipping wiki mirror")
     except OSError as exc:
