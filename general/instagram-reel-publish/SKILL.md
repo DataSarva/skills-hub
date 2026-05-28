@@ -48,7 +48,7 @@ Required for IG Reels:
 | pixel format | `yuv420p` (8-bit) |
 | resolution | `1080×1920` (9:16) — IG will re-encode anything else, often badly |
 | framerate | 23.976–60 (30 is the safe default) |
-| duration | 3s ≤ d ≤ 90s |
+| duration | 3s ≤ d — IG Reels accept up to ~180s (verified: a 115s reel posted fine). `validate_reel.sh` still warns >90s as conservative; safe to ignore up to ~3min. |
 | codec (audio) | `aac` (silent track is fine, see below) |
 | audio | MUST exist — IG rejects video-only mp4 |
 | container | `.mp4` with `+faststart` (`-movflags +faststart`) |
@@ -101,11 +101,13 @@ ffmpeg -y -ss 2 -i reel.mp4 -frames:v 1 -q:v 2 cover.jpg
 
 ```bash
 cd ~/Documents/insta_ai_vid
-iex contentgen -- python3 lib/platforms/instagram_upload.py \
+iex contentgen -- .venv/bin/python3 lib/platforms/instagram_upload.py \
   --video <path>/reel.mp4 \
   --caption-file <path>/caption.json \
   --cover <path>/cover.jpg
 ```
+
+> **Use `.venv/bin/python3`, NOT bare `python3`.** `iex contentgen` injects the IG creds but resolves `python3` to `/opt/homebrew/bin/python3` (system), which lacks `instagrapi` → `ModuleNotFoundError: No module named 'instagrapi'`. The deps live in `~/Documents/insta_ai_vid/.venv`; call that interpreter explicitly. (`iex` injects secrets only; it does not activate the venv.)
 
 On success the script prints:
 
