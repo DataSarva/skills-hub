@@ -2,15 +2,44 @@
 name: google-flow-agent-driver
 description: Drive Google Flow (labs.google/fx/tools/flow, Gemini "Omni Flash" video model) fully automated via the opencli Browser Bridge — build reusable named Characters, generate text-free 9:16/16:9 video clips that summon those characters by @name, download them, then assemble a finished reel (watermark removal + speed-up + Telugu/other-language VO + Remotion subtitles). Use whenever a reel or video clip needs to come out of Google Flow / Veo / Gemini Omni Flash. Triggers on "google flow", "flow omni flash", "make a reel with google flow", "gemini video", "veo video via web", "opencli flow automation", "flow character consistency", "@character flow".
 tier: general
-version: 1
+version: 2
 tags: [google-flow, gemini, veo, omni-flash, opencli, browser-automation, video, reel, instagram-reel-source]
 ---
 
-# Google Flow agent driver
+# Google Flow agent driver — production reel template
 
-End-to-end recipe for driving **Google Flow** (`labs.google/fx/tools/flow`, the Gemini **Omni Flash** video model) **directly through the browser** via the `opencli` Browser Bridge. Flow has **no public video API** — it's a web app, so we drive the real logged-in Chrome session. This is the Flow analogue of `[[grok-imagine-agent-driver]]`; Flow is usually the better choice because **native Characters give true cross-shot identity lock** and generation runs on the **subscription** (no metered API credit wall).
+End-to-end recipe for driving **Google Flow** (`labs.google/fx/tools/flow`, currently the Gemini **Omni Flash** video model) **directly through the browser** via the `opencli` Browser Bridge. Flow has **no public video API** — it's a web app, so we drive the real logged-in Chrome session. This is the Flow analogue of `[[grok-imagine-agent-driver]]`; Flow is usually the better choice because **native Characters give true cross-shot identity lock** and generation runs on the **subscription** (no metered API credit wall).
 
-Proven end-to-end on a 19-shot, 103 s Telugu devotional reel (`~/Downloads/insta_story/gemini_prod/`). Reuse that dir's `bin/` scripts — they encode everything below.
+**This is the canonical, production-ready reference for every future Gemini/Veo version.** It's **model-version-agnostic**: when Google ships a newer model, nothing here changes except which entry you pick in the settings popover's **model** list — the driver, characters, clip gen, watermark removal, continuous-VO, and Remotion assembly all hold. Proven end-to-end on a 19-shot Telugu devotional reel (`~/Downloads/insta_story/gemini_prod/`, ~115 s, 1080×1920).
+
+## The template (copy this and go)
+
+A complete working copy lives in this skill: `scripts/` (all stage scripts + `shots.example.json`) and `remotion-src/` (the Remotion comp). The reference project is `~/Downloads/insta_story/gemini_prod/`.
+
+**Directory layout**
+```
+project/
+  shots.json              # THE backbone: per shot id/scene/dur/chars/video_prompt/narration_te/onscreen_te/vo_dur
+  bin/                    # the stage scripts below + tools/veo_wmremove (watermark binary)
+  clips/                  # raw downloads from Flow (watermarked, native audio)
+  clean_clips/            # after watermark removal (un-sped)
+  audio/                  # raw Telugu VO (xAI TTS)
+  final_clips/ final_audio/   # continuous-fit clip + sped VO that Remotion renders
+  remotion/               # public/{clips,audio,music} symlinks -> final dirs; src/ = the comp
+  reel_FINAL.mp4
+```
+
+**One-command run order** (`bin/run_pipeline.sh <profile> <project_url> [stage]`):
+```
+preflight  → opencli doctor + profile connected, signed into labs.google/fx (Veo access)
+characters → build the named cast (Phase 1). IDENTITY GATE: review before clips.
+clips      → generate text-free clips that summon @names (Phase 2, resumable)
+tts        → Telugu/other VO per shot via xAI TTS (eve), capture durations
+clean      → remove the Veo "✦" watermark -> clean_clips/  (veo-watermark-remover)
+assemble   → CONTINUOUS VO: fuller flowing narration, fit each clip to its line (no dead gaps)
+render     → gen_timeline.py -> Remotion render 1080×1920 -> reel_FINAL.mp4
+```
+Each stage is independently runnable (`… clips`, `… render`) and resumable. Author `shots.json` first (see `scripts/shots.example.json` for the exact schema + a full worked example), build the matching Flow Characters so `@handles` resolve, then run.
 
 ## Mental model
 

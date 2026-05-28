@@ -1,16 +1,19 @@
 #!/usr/bin/env bash
 # Make the voiceover continuous across the whole reel: each shot's duration = its (sped) VO length
 # + small breath, and the clean source clip is time-fitted to that length so motion maps onto the
-# narration with no dead gaps. Sources: audio/shotN.mp3 (raw TTS), .src_clips/shotN.mp4 (clean 1.5x).
+# narration with no dead gaps. Sources: audio/shotN.mp3 (raw TTS) + SRC_DIR clips (canonical:
+# clean_clips = watermark-removed, un-sped; fit happens here in a single setpts so motion isn't
+# double-transformed). Set SRC_DIR=.src_clips to reuse an older clean+sped snapshot instead.
 set -euo pipefail
 DIR="$(cd "$(dirname "$0")" && pwd)"; ROOT="$(dirname "$DIR")"
 VO_X="${VO_X:-1.25}"; BREATH="${BREATH:-0.2}"
+SRC_DIR="${SRC_DIR:-clean_clips}"; [ -d "$ROOT/$SRC_DIR" ] || SRC_DIR=".src_clips"
 mkdir -p "$ROOT/final_clips" "$ROOT/final_audio"
 dur(){ ffprobe -v error -show_entries format=duration -of default=nk=1:nw=1 "$1"; }
 
 IDS=$(python3 -c "import json;print(' '.join(str(s['id']) for s in json.load(open('$ROOT/shots.json'))['shots']))")
 for ID in $IDS; do
-  RAW_VO="$ROOT/audio/shot$ID.mp3"; SRC="$ROOT/.src_clips/shot$ID.mp4"
+  RAW_VO="$ROOT/audio/shot$ID.mp3"; SRC="$ROOT/$SRC_DIR/shot$ID.mp4"
   FA="$ROOT/final_audio/shot$ID.mp3"; FC="$ROOT/final_clips/shot$ID.mp4"
   # 1) speed VO (pitch-preserved)
   ffmpeg -y -i "$RAW_VO" -filter:a "atempo=$VO_X" "$FA" >/dev/null 2>&1
