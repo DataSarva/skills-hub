@@ -1,0 +1,199 @@
+{
+  "meta": {
+    "title_te": "గజేంద్రుడ్ని విష్ణువు 1000 సంవత్సరాలు ఎందుకు ఆలస్యం చేశాడు? | ఏనుగు & మొసలి అసలు కథ",
+    "aspect": "9:16",
+    "width": 1080,
+    "height": 1920,
+    "fps": 30,
+    "voice": "eve",
+    "lang": "te",
+    "generator": "google_flow_omni_flash",
+    "model": "Omni Flash",
+    "driver": "opencli browser bridge -> labs.google/fx/tools/flow",
+    "champion_grade": "incandescent volumetric saffron-amber god-rays with molten ember core and warm ember underglow, molten gold ornament highlights, deep burnt-crimson and emerald-water shadows, high-contrast Netflix-grade warm cinematic devotional lighting, subtle film grain",
+    "champion_camera": "urgent handheld tracking at eye level, no Ken Burns, no slow-motion stretch",
+    "champion_style": "choreography — explicit physical verbs, weight, impact, momentum, motion blur; characters genuinely move, never a frozen living-photo",
+    "consistency": "Flow native Characters summoned by @handle; identity + voice locked per character",
+    "notes": "Telugu is NOT baked by Flow (garbled glyphs) — narration_te is xAI TTS (eve) rendered as synced Remotion subtitles; onscreen_te are optional emphasis kickers. Clips generated text-free and muted; Omni audio discarded. Benevolent framing on the chakra/death beats to dodge moderation (divine light dissolves, no claws/blade reaching AT a victim).",
+    "edition": "youtube_60",
+    "target": "YouTube Shorts <=60s"
+  },
+  "characters": [
+    {
+      "handle": "@Gajendra",
+      "desc": "majestic royal white elephant king, ornate golden head ornaments and jeweled anklets, kind powerful eyes, regal bearing"
+    },
+    {
+      "handle": "@GajendraPain",
+      "desc": "the same white elephant king but exhausted and trembling, one front leg clamped, eyes turned upward in desperate devotion, body strained"
+    },
+    {
+      "handle": "@Crocodile",
+      "desc": "enormous fierce dark-scaled crocodile, ridged armored back, ancient and menacing, glistening wet hide"
+    },
+    {
+      "handle": "@Vishnu",
+      "desc": "Lord Vishnu, serene blue-skinned four-armed deity, golden silk and crown, calm radiant face, holding conch and the spinning Sudarshana Chakra"
+    },
+    {
+      "handle": "@Garuda",
+      "desc": "Garuda the great golden-winged eagle mount, muscular humanoid-avian, vast feathered wings, fierce noble face"
+    },
+    {
+      "handle": "@Indradyumna",
+      "desc": "King Indradyumna, handsome proud young king, rich royal robes and crown, arrogant prideful expression"
+    },
+    {
+      "handle": "@Agastya",
+      "desc": "Sage Agastya, old ascetic with long white beard and matted hair, rudraksha beads, stern wrathful eyes"
+    },
+    {
+      "handle": "@Huhu",
+      "desc": "Gandharva king Huhu, handsome celestial musician in shimmering divine attire, playful mischievous face"
+    },
+    {
+      "handle": "@Devala",
+      "desc": "Sage Devala, grave elder ascetic, white beard, serious meditative face, simple ochre cloth"
+    }
+  ],
+  "shots": [
+    {
+      "id": 1,
+      "scene": "hook",
+      "dur": 5.042,
+      "chars": [
+        "@Gajendra",
+        "@Crocodile"
+      ],
+      "video_prompt": "@Gajendra the royal white elephant and @Crocodile the huge dark crocodile heave and strain against each other at the churning edge of a vast emerald lake; the elephant braces its legs and pulls back hard, water explodes upward in sheets, the crocodile thrashes its tail and drags forward; both are visibly exhausted, mud and spray fly, ripples ring outward; urgent handheld tracking at eye level, warm saffron-amber dawn god-rays over emerald water, cinematic devotional grade, subtle film grain, no text",
+      "narration_te": "వెయ్యి సంవత్సరాలు ఒక ఏనుగు, ఒక మొసలి ఒకే సరస్సులో విడవకుండా పోరాడుతూనే ఉన్నాయి.",
+      "onscreen_te": "1000 సంవత్సరాలు?",
+      "vo_dur": 4.793
+    },
+    {
+      "id": 3,
+      "scene": "indradyumna_past",
+      "dur": 3.75,
+      "chars": [
+        "@Indradyumna"
+      ],
+      "video_prompt": "@Indradyumna the proud young king strides across a sunlit marble palace hall, robes and gold jewelry swaying, chin raised arrogantly, attendants bowing as he sweeps past without a glance; banners ripple, dust motes drift in shafts of warm light; smooth handheld follow, opulent golden palace lighting, cinematic devotional grade, film grain, no text",
+      "narration_te": "ఈ గజేంద్రుడు పూర్వజన్మలో ఇంద్రద్యుమ్నుడు అనే గర్విష్ఠి రాజు.",
+      "onscreen_te": "పూర్వ జన్మ",
+      "vo_dur": 3.478
+    },
+    {
+      "id": 5,
+      "scene": "indradyumna_past",
+      "dur": 5.5,
+      "chars": [
+        "@Agastya",
+        "@Indradyumna"
+      ],
+      "video_prompt": "@Agastya raises his hand and points sharply at @Indradyumna, beard and matted hair lifting, eyes blazing as he pronounces a curse; a ripple of energy distorts the air and the king recoils, shielding his face, his form beginning to shimmer; embers and dust swirl; urgent handheld push-in, incandescent saffron-amber flare against burnt-crimson shadow, cinematic devotional grade, film grain, no text",
+      "narration_te": "అగస్త్య మహర్షిని అవమానించినందుకు, ఏనుగువై జన్మించమని ఆయన శాపం పొందాడు.",
+      "onscreen_te": "శాపం",
+      "vo_dur": 5.313
+    },
+    {
+      "id": 6,
+      "scene": "huhu_past",
+      "dur": 3.292,
+      "chars": [
+        "@Huhu"
+      ],
+      "video_prompt": "@Huhu the handsome celestial gandharva drifts playfully through a shimmering heavenly garden of glowing lotuses and floating petals, laughing, strumming a divine instrument, robes trailing light; soft clouds part around him; graceful handheld drift, ethereal warm-gold celestial glow, cinematic devotional grade, film grain, no text",
+      "narration_te": "ఆ మొసలి కూడా పూర్వజన్మలో హుహు అనే గంధర్వ రాజు.",
+      "onscreen_te": "",
+      "vo_dur": 3.032
+    },
+    {
+      "id": 7,
+      "scene": "huhu_past",
+      "dur": 4.875,
+      "chars": [
+        "@Huhu",
+        "@Devala"
+      ],
+      "video_prompt": "@Devala the grave sage stands waist-deep in a clear celestial river in meditation when @Huhu mischievously lunges underwater and yanks the sage's ankle, pulling him off balance; water splashes up, the sage's arms fly out, his serene face snapping to alarm then anger; playful-turned-grave energy, handheld at water level, warm dawn light on rippling water, cinematic devotional grade, film grain, no text",
+      "narration_te": "దేవల మహర్షి కాలును నీటిలో లాగినందుకు, మొసలిగా మారే శాపం పొందాడు.",
+      "onscreen_te": "",
+      "vo_dur": 4.604
+    },
+    {
+      "id": 9,
+      "scene": "struggle",
+      "dur": 4.208,
+      "chars": [
+        "@Gajendra",
+        "@Crocodile"
+      ],
+      "video_prompt": "wide shot of the vast lake at golden hour as @Gajendra and @Crocodile lock together again, the elephant rearing and twisting, the crocodile rolling its armored body; huge sheets of water burst and rain down, waves slam the shore, birds scatter; powerful momentum and impact, urgent handheld tracking, warm saffron-amber light raking across emerald water, cinematic devotional grade, motion blur, film grain, no text",
+      "narration_te": "ఇలా రెండు శాపాలు ఒకే సరస్సులో కలిసి, వెయ్యేళ్లు పోరాడసాగాయి.",
+      "onscreen_te": "",
+      "vo_dur": 3.94
+    },
+    {
+      "id": 13,
+      "scene": "surrender",
+      "dur": 4.958,
+      "chars": [
+        "@GajendraPain"
+      ],
+      "video_prompt": "@GajendraPain curls its trunk down to the water, plucks a single glowing pink lotus, and lifts it high overhead as an offering toward the heavens; droplets fall in slow sparkling arcs, the lotus catches radiant light; tender deliberate motion, warm saffron-amber god-rays streaming down onto the elephant and lotus, cinematic devotional grade, film grain, no text",
+      "narration_te": "చివరికి గజేంద్రుడు తొండంతో ఒక పద్మాన్ని ఎత్తి విష్ణువుకు భక్తితో అర్పించాడు.",
+      "onscreen_te": "",
+      "vo_dur": 4.687
+    },
+    {
+      "id": 14,
+      "scene": "surrender",
+      "dur": 4.667,
+      "chars": [
+        "@GajendraPain"
+      ],
+      "video_prompt": "serene devotional close shot of @Gajendra the white elephant lifting its head and trunk skyward in calm heartfelt prayer while holding a glowing pink lotus, eyes peaceful and full of faith, soft warm light blooming around it; gentle reverent motion, radiant golden devotional glow, emerald water bokeh behind, cinematic devotional grade, film grain, no text",
+      "narration_te": "నన్ను రక్షించు స్వామీ అని హృదయపూర్వకంగా పూర్తి శరణాగతి చేశాడు.",
+      "onscreen_te": "",
+      "vo_dur": 4.396
+    },
+    {
+      "id": 15,
+      "scene": "vishnu_arrival",
+      "dur": 4.792,
+      "chars": [
+        "@Vishnu",
+        "@Garuda"
+      ],
+      "video_prompt": "@Vishnu the radiant blue four-armed deity descends from a burst of divine light astride @Garuda the great golden-winged eagle, wings sweeping down hard and throwing back clouds, silk and garlands streaming, the Sudarshana Chakra spinning brilliantly on a finger; clouds part, golden rays explode outward; majestic powerful descent, urgent handheld upward tracking, blinding saffron-gold celestial radiance, cinematic devotional grade, motion blur, film grain, no text",
+      "narration_te": "ఆ క్షణమే ఒక్క ఆలస్యం లేకుండా గరుడవాహనుడై విష్ణువు దిగివచ్చాడు.",
+      "onscreen_te": "విష్ణువు",
+      "vo_dur": 4.531
+    },
+    {
+      "id": 16,
+      "scene": "vishnu_arrival",
+      "dur": 4.292,
+      "chars": [
+        "@Vishnu"
+      ],
+      "video_prompt": "@Vishnu releases the spinning Sudarshana Chakra, a blazing wheel of golden light that streaks across the lake; where it passes a brilliant radiance blooms over the water and the crocodile's dark form dissolves peacefully into rising motes of light, freed; water glows, ripples of light expand; benevolent divine release, no blade or claw touching a victim, urgent handheld, incandescent saffron-gold light over emerald water, cinematic devotional grade, motion blur, film grain, no text",
+      "narration_te": "సుదర్శన చక్రంతో మొసలిని విముక్తి చేసి, ఇద్దరికీ మోక్షం ఇచ్చాడు.",
+      "onscreen_te": "",
+      "vo_dur": 4.057
+    },
+    {
+      "id": 19,
+      "scene": "conclusion",
+      "dur": 4.5,
+      "chars": [
+        "@Vishnu",
+        "@Gajendra"
+      ],
+      "video_prompt": "final wide shot of @Vishnu blessing @Gajendra at the edge of a glassy golden lake at sunrise, light radiating outward in vast warm god-rays, lotuses blooming across the water, the scene breathing with gentle motion; transcendent peace, slow handheld settle, luminous saffron-amber devotional glow, cinematic devotional grade, film grain, no text",
+      "narration_te": "భక్తి, పూర్తి శరణాగతి కంటే గొప్పది ఈ లోకంలో మరేదీ లేదు.",
+      "onscreen_te": "శరణాగతి",
+      "vo_dur": 4.24
+    }
+  ]
+}

@@ -2,7 +2,7 @@
 name: google-flow-agent-driver
 description: Drive Google Flow (labs.google/fx/tools/flow, Gemini "Omni Flash" video model) fully automated via the opencli Browser Bridge — build reusable named Characters, generate text-free 9:16/16:9 video clips that summon those characters by @name, download them, then assemble a finished reel (watermark removal + speed-up + Telugu/other-language VO + Remotion subtitles). Use whenever a reel or video clip needs to come out of Google Flow / Veo / Gemini Omni Flash. Triggers on "google flow", "flow omni flash", "make a reel with google flow", "gemini video", "veo video via web", "opencli flow automation", "flow character consistency", "@character flow".
 tier: general
-version: 2
+version: 3
 tags: [google-flow, gemini, veo, omni-flash, opencli, browser-automation, video, reel, instagram-reel-source]
 ---
 
@@ -40,6 +40,24 @@ assemble   → CONTINUOUS VO: fuller flowing narration, fit each clip to its lin
 render     → gen_timeline.py -> Remotion render 1080×1920 -> reel_FINAL.mp4
 ```
 Each stage is independently runnable (`… clips`, `… render`) and resumable. Author `shots.json` first (see `scripts/shots.example.json` for the exact schema + a full worked example), build the matching Flow Characters so `@handles` resolve, then run.
+
+## Multi-platform editions — Instagram master + YouTube ≤60s
+
+Publish to both: **Instagram = the full master reel** (`shots.json`, the longer continuous-VO cut), **YouTube Shorts = a ≤60s derived edition** (same 9:16 1080×1920). The YouTube cut is **condensed, not sped-up** — it keeps full-speed clips but selects the essential beats and uses tighter one-sentence narration, so the whole story lands in <60s without feeling rushed.
+
+**`shots.json` is the master / source of truth — never overwrite it for a derived edition.** A derived edition is its own shots file + its own working dirs under `editions/<name>/`, rendered by reusing the *already-generated* clean clips (no Flow re-gen, no new credits):
+
+```bash
+# 1) derive the edition shots file from the master: pick essential shot ids, condense narration_te
+#    (see scripts/shots.yt60.example.json — 11 of 19 beats, one fuller sentence each)
+# 2) build it (reuses clean source clips; writes editions/yt60/, renders reel_yt60.mp4):
+VO_X=1.15 BREATH=0.2 bin/make_edition.sh yt60 shots.yt60.json
+```
+`make_edition.sh` exports per-edition `AUDIO_DIR`/`FINAL_AUDIO`/`FINAL_CLIPS` + `SHOTS`, runs TTS → continuous-fit → temporarily repoints `remotion/public/{clips,audio}` to the edition dirs → renders → **restores the master symlinks**. The master reel and `shots.json` are untouched. Proven: 19-shot master ≈115s (IG) and an 11-beat 49.9s cut (YouTube) from the same clips.
+
+Sizing the ≤60s cut: ~11 beats × ~4.5s ≈ 50s. Use `VO_X=1.15` (gentler than the master's 1.25× — clearer for a standalone watch) and aim narration ~one rich sentence per beat. All assembly scripts are **edition-aware** via env (`SHOTS`, `AUDIO_DIR`, `FINAL_CLIPS`, `FINAL_AUDIO`, `TIMELINE`), defaulting to the master.
+
+**Publishing:** Instagram via the `instagram-reel-publish` skill (validates 1080×1920 H.264/AAC 3–90s — the master fits). YouTube Shorts wants vertical ≤60s (the edition fits); upload via the YouTube Data API / Studio.
 
 ## Mental model
 
