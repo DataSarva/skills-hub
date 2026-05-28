@@ -97,6 +97,13 @@ Optional. Pass `--cover <path>.jpg|.png` — should be 1080×1920. Defaults to t
 ffmpeg -y -ss 2 -i reel.mp4 -frames:v 1 -q:v 2 cover.jpg
 ```
 
+**Custom-selected cover (curated hero frame).** Don't ship the auto frame@2s — pull a few candidate hero frames, let the user pick, then pass it as `--cover`:
+```bash
+# candidates from known hero shots, full 1080×1920
+for s in 15 13 1 19; do ffmpeg -y -i final_clips/shot$s.mp4 -vf "select=eq(n\,40)" -frames:v 1 -q:v 2 covers/cand_shot$s.jpg; done
+```
+**You can't reliably change a Reel's cover after posting via the API.** So a custom cover means setting `--cover` at upload time. If a reel is already up with the wrong cover, **re-post**: upload the new version (with `--cover`) first, confirm the new `media_id`, *then* delete the old — so there's never a gap (the URL/`code` changes). Cover image should be 1080×1920 jpg/png.
+
 ## Canonical upload command
 
 ```bash
@@ -142,8 +149,9 @@ print('caption updated')
 
 ```bash
 cd ~/Documents/insta_ai_vid
-iex contentgen -- python3 lib/platforms/instagram_delete.py --media-id <media_id>
+iex contentgen -- .venv/bin/python3 lib/platforms/instagram_delete.py --pk <media_id>
 ```
+The delete flag is **`--pk`** (the numeric media_id), or `--code <reelCode>` / `--username`. There is **no `--media-id`** flag — passing it errors `unrecognized arguments`. Prints `deleted=True`.
 
 ## Common errors and fixes
 

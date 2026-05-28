@@ -57,7 +57,7 @@ VO_X=1.15 BREATH=0.2 bin/make_edition.sh yt60 shots.yt60.json
 
 Sizing the ≤60s cut: ~11 beats × ~4.5s ≈ 50s. Use `VO_X=1.15` (gentler than the master's 1.25× — clearer for a standalone watch) and aim narration ~one rich sentence per beat. All assembly scripts are **edition-aware** via env (`SHOTS`, `AUDIO_DIR`, `FINAL_CLIPS`, `FINAL_AUDIO`, `TIMELINE`), defaulting to the master.
 
-**Publishing:** Instagram via the `instagram-reel-publish` skill (validates 1080×1920 H.264/AAC 3–90s — the master fits). YouTube Shorts wants vertical ≤60s (the edition fits); upload via the YouTube Data API / Studio.
+**Publishing:** Instagram via `[[instagram-reel-publish]]` (1080×1920 H.264/AAC; IG accepts up to ~3 min, so the master posts fine — use a custom-selected hero-frame `--cover`). YouTube Shorts via `[[youtube-shorts-publish]]` (vertical ≤60s + `#Shorts` — the edition fits). Verified live: IG reel + YouTube Short from this same Gajendra project.
 
 ## Mental model
 
