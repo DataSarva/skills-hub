@@ -9,14 +9,28 @@ description: >-
   with Remotion + Noto Sans Telugu (Chromium does full HarfBuzz shaping), synced to the VO.
   Proven end-to-end in the prahaladhudu v3 devotional reel.
 tier: general
-version: 1
-tags: [telugu, tts, voiceover, subtitles, captions, remotion, xai, noto-sans-telugu, indic, reels]
+version: 2
+tags: [telugu, tts, voiceover, subtitles, captions, remotion, xai, cloud-tts, chirp3, noto-sans-telugu, indic, reels]
 ---
 
 # Telugu voice + Telugu text (the two things that always go wrong)
 
 Two independent problems, both solved here. Telugu (and other Indic scripts) need **complex-text
 shaping** (conjuncts, vowel signs reordering). Most tools don't do it. These do.
+
+## ⭐ AUTHENTICITY UPDATE (2026-05): for natural Telugu, prefer Google Cloud TTS over xAI
+
+xAI TTS (`eve`/`Leo`) is **English-trained** → Telugu is intelligible but **accented/non-native** (a user
+flagged it "not authentic"). For genuinely native Telugu, use **Google Cloud Text-to-Speech `te-IN-Chirp3-HD-*`**
+voices (female: `Leda`, `Aoede`, `Kore`; pick by ear). Auth via `gcloud auth print-access-token` (no API key);
+quota header `x-goog-user-project: <gcloud-active-project>` (use `gcloud config get-value project`, NOT
+contentgen's `GOOGLE_CLOUD_PROJECT=contentsarva`, which 404s). One-time `gcloud services enable texttospeech.googleapis.com`. Free tier covers reels.
+
+```bash
+# POST https://texttospeech.googleapis.com/v1/text:synthesize  (Bearer token + x-goog-user-project)
+# body: {"input":{"text":...},"voice":{"languageCode":"te-IN","name":"te-IN-Chirp3-HD-Leda"},"audioConfig":{"audioEncoding":"MP3","speakingRate":1.05}}
+```
+Chirp3-HD gotchas: **commas barely pause** — split list items into short sentences with **periods** (`...` for a beat) or they run together; **avoid the zero-width-joiner (ZWNJ) in transliterated English loanwords** (`బెడ్‌రోల్` garbles — use a native word like `పక్క చుట్ట`); no SSML, control pace via `speakingRate`. Working helper: `flow-telugu-comedy-reel/scripts/cloud_tts.sh`. Keep using xAI only when gcloud isn't available. (Part 2 below — Telugu on-screen text via Remotion — is unchanged and applies to both.)
 
 ---
 

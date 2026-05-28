@@ -1,0 +1,158 @@
+{
+  "meta": {
+    "title_te": "బారిష్టర్ పార్వతీశం — లేడీస్ కంపార్ట్‌మెంట్ హాస్యం",
+    "source": "Mokkapati Narasimha Sastry, 1924",
+    "aspect": "9:16",
+    "width": 1080,
+    "height": 1920,
+    "fps": 30,
+    "voice": "eve",
+    "lang": "te",
+    "generator": "google_flow_omni_flash",
+    "model": "Omni Flash",
+    "driver": "opencli browser bridge -> labs.google/fx/tools/flow",
+    "champion_grade": "polished animated comedy film look, warm vintage 1920s sepia base with bright saturated character pops, soft diffused cinematic lighting, gentle film grain, charming stylized 3D-2D toon render, exaggerated cartoon physics",
+    "champion_camera": "lively comic framing, gentle push-ins and snap-zooms on reaction beats, bouncy cartoon energy, no Ken Burns, no slow stretch"
+  },
+  "characters": [
+    {
+      "handle": "@Parvateesam",
+      "desc": "Comedic vintage cartoon dandy caricature of a young Telugu man, EXACT same design every shot: tall black top hat, black tailcoat with long swallow-tails over a white shirt and white cravat bow, flowing white dhoti, pointy black shoes, big upward-curled handlebar mustache, cheeky innocent face; ALWAYS carrying a bright RED rectangular briefcase in one hand, a rolled GREEN bedroll tucked under one arm, and a long black umbrella; exaggerated rubber-hose animated comedy style, bold clean outlines"
+    },
+    {
+      "handle": "@Lady",
+      "desc": "Prim 1920s British lady in huge feathered hat, lace dress, gloves and pearls, parasol in hand, wildly exaggerated shocked and fainting expressions, polished animated comedy style."
+    },
+    {
+      "handle": "@Guard",
+      "desc": "Blustering British train guard with thick bushy mustache, bright red uniform, peaked cap, shiny whistle and clipboard, comically pompous cartoon authority."
+    },
+    {
+      "handle": "@Cooksman",
+      "desc": "Cheerful Indian railway catering man with big warm grin, white jacket and cap, snack tray always ready, laughing and helpful cartoon helper."
+    }
+  ],
+  "shots": [
+    {
+      "id": 2,
+      "scene": "hook-departure",
+      "reuse": true,
+      "narration_te": "అరెరే! బారిష్టర్ పార్వతీశం గుర్తున్నాడా? రండి, ఒక తమాషా సన్నివేశం గుర్తు చేసుకుందాం! మన అమాయక పార్వతీశం బారిష్టర్ చదవడానికి ఇంగ్లాండ్ బయలుదేరాడు.",
+      "onscreen_te": "పార్వతీశం గుర్తున్నాడా?",
+      "video_prompt": "Vertical 9:16 medium tracking shot of @Parvateesam (THE SAME MAN IN EVERY SHOT, with a HUGE bold black upward-curled handlebar mustache clearly on his face, tall black top hat, black tailcoat with tails, white cravat bow, white dhoti, bright red briefcase, rolled green bedroll) at a sunny village station, big mustache bouncing with excitement, waving wildly with one hand while the other arm is buried under his fat green bedroll, brown suitcase tied with rope at his feet, father figure giving a proud pat, exaggerated joyful hops in animation, charming stylized cartoon style, bright golden morning light. lively comic framing, gentle push-ins and snap-zooms on reaction beats, bouncy cartoon energy, no Ken Burns, no slow stretch. polished animated comedy film look, warm vintage 1920s sepia base with bright saturated character pops, soft diffused cinematic lighting, gentle film grain, charming stylized 3D-2D toon render, exaggerated cartoon physics. no text",
+      "dur": 9.333,
+      "vo_dur": 9.084,
+      "chars": [
+        "@Parvateesam"
+      ]
+    },
+    {
+      "id": 3,
+      "scene": "saman",
+      "reuse": true,
+      "narration_te": "వెంట ఏం తీసుకెళ్లాడంటే... ఊరగాయలు. అప్పడాలు. ఇంకా ఆ ప్రసిద్ధమైన ఆకుపచ్చ పక్క చుట్ట. నిండుగా సామాను!",
+      "onscreen_te": "నిండా సామాను!",
+      "video_prompt": "Vertical 9:16 low-angle shot of @Parvateesam (THE SAME MAN IN EVERY SHOT, with a HUGE bold black upward-curled handlebar mustache clearly on his face, tall black top hat, black tailcoat with tails, white cravat bow, white dhoti, bright red briefcase, rolled green bedroll) struggling to lift a comically huge pile of village luggage onto a cart, green bedroll unrolling slightly like a tongue, suitcase bursting with pickles and papads, exaggerated squash and stretch as he wobbles under the weight, polished animated comedy film, warm cartoon colors. lively comic framing, gentle push-ins and snap-zooms on reaction beats, bouncy cartoon energy, no Ken Burns, no slow stretch. polished animated comedy film look, warm vintage 1920s sepia base with bright saturated character pops, soft diffused cinematic lighting, gentle film grain, charming stylized 3D-2D toon render, exaggerated cartoon physics. no text",
+      "dur": 8.667,
+      "vo_dur": 8.437,
+      "chars": [
+        "@Parvateesam"
+      ]
+    },
+    {
+      "id": 35,
+      "scene": "england-arrival",
+      "chars": [
+        "@Parvateesam"
+      ],
+      "dur": 6.083,
+      "vo_dur": 5.772,
+      "narration_te": "చివరికి లండన్ చేరుకున్నాడు — పొగమంచు, పెద్ద పెద్ద భవంతులు చూసి మన పార్వతీశం నోరెళ్లబెట్టాడు!",
+      "onscreen_te": "లండన్ చేరాడు!",
+      "video_prompt": "Animated comedy film scene. @Parvateesam (THE SAME MAN IN EVERY SHOT, with a HUGE bold black upward-curled handlebar mustache clearly on his face, tall black top hat, black tailcoat with tails, white cravat bow, white dhoti, bright red briefcase, rolled green bedroll) steps onto a grand foggy 1920s London railway platform, craning his neck up in wide-eyed wonder at towering iron arches and swirling steam, spinning around clutching his red briefcase and green bedroll, jaw dropping comically. lively comic framing, gentle push-ins and snap-zooms on reaction beats, bouncy cartoon energy, no Ken Burns, no slow stretch. polished animated comedy film look, warm vintage 1920s sepia base with bright saturated character pops, soft diffused cinematic lighting, gentle film grain, charming stylized 3D-2D toon render, exaggerated cartoon physics. no text"
+    },
+    {
+      "id": 30,
+      "scene": "boards-ladies",
+      "reuse": false,
+      "narration_te": "ఇంగ్లాండ్ స్టేషన్‌లో ఏ పెట్టె ఎక్కాలో తెలియక, ఒక మంచి పెట్టె చూసి హాయిగా ఎక్కేశాడు.",
+      "onscreen_te": "ఏ పెట్టె ఎక్కాలి?",
+      "video_prompt": "Animated comedy film scene. @Parvateesam (THE SAME MAN IN EVERY SHOT, with a HUGE bold black upward-curled handlebar mustache clearly on his face, tall black top hat, black tailcoat with tails, white cravat bow, white dhoti, bright red briefcase, rolled green bedroll) climbs aboard an elegant 1920s train carriage at a foggy English platform, beaming proudly, hauling his red briefcase and green bedroll up the steps with a bouncy hop, steam swirling. lively comic framing, gentle push-ins and snap-zooms on reaction beats, bouncy cartoon energy, no Ken Burns, no slow stretch. polished animated comedy film look, warm vintage 1920s sepia base with bright saturated character pops, soft diffused cinematic lighting, gentle film grain, charming stylized 3D-2D toon render, exaggerated cartoon physics. no text",
+      "dur": 5.417,
+      "vo_dur": 5.121,
+      "chars": [
+        "@Parvateesam"
+      ]
+    },
+    {
+      "id": 31,
+      "scene": "ladies-shocked",
+      "reuse": false,
+      "narration_te": "కానీ అది లేడీస్ కంపార్ట్‌మెంట్! లోపల ఫ్యాన్సీ లేడీలు చూసి షాక్ అయ్యారు!",
+      "onscreen_te": "లేడీస్ కంపార్ట్‌మెంట్!",
+      "video_prompt": "Animated comedy film scene. interior of an elegant ladies train compartment; two fancy @Lady passengers in feathered hats freeze and gasp in horror, eyes bulging, as @Parvateesam (THE SAME MAN IN EVERY SHOT, with a HUGE bold black upward-curled handlebar mustache clearly on his face, tall black top hat, black tailcoat with tails, white cravat bow, white dhoti, bright red briefcase, rolled green bedroll) plops down beaming with his green bedroll on his lap, utterly clueless. lively comic framing, gentle push-ins and snap-zooms on reaction beats, bouncy cartoon energy, no Ken Burns, no slow stretch. polished animated comedy film look, warm vintage 1920s sepia base with bright saturated character pops, soft diffused cinematic lighting, gentle film grain, charming stylized 3D-2D toon render, exaggerated cartoon physics. no text",
+      "dur": 5.542,
+      "vo_dur": 5.247,
+      "chars": [
+        "@Parvateesam",
+        "@Lady"
+      ]
+    },
+    {
+      "id": 32,
+      "scene": "pickle-chaos-scream",
+      "reuse": false,
+      "narration_te": "ఆ పక్క చుట్ట టక్కున విప్పుకుంది. ఊరగాయలు, అప్పడాలు గాలిలో ఎగిరాయి. లేడీ కెవ్వున కేక పెట్టింది... ఓ మై గాడ్... బ్లడీ సామాన్!",
+      "onscreen_te": "బ్లడీ సామాన్!",
+      "video_prompt": "Animated comedy film scene. INSIDE an elegant 1920s ladies train compartment with polished wooden walls, plush tufted seats and curtained windows; @Parvateesam (THE SAME MAN IN EVERY SHOT, with a HUGE bold black upward-curled handlebar mustache clearly on his face, tall black top hat, black tailcoat with tails, white cravat bow, white dhoti, bright red briefcase, rolled green bedroll) sits as his green bedroll springs open like a slinky, launching papads and pickles arcing through the air inside the carriage; a fancy @Lady seated across recoils and screams, jaw dropping, a pickle stuck to her feathered hat, exaggerated slapstick. lively comic framing, gentle push-ins and snap-zooms on reaction beats, bouncy cartoon energy, no Ken Burns, no slow stretch. polished animated comedy film look, warm vintage 1920s sepia base with bright saturated character pops, soft diffused cinematic lighting, gentle film grain, charming stylized 3D-2D toon render, exaggerated cartoon physics. no text",
+      "dur": 8.708,
+      "vo_dur": 8.477,
+      "chars": [
+        "@Parvateesam",
+        "@Lady"
+      ]
+    },
+    {
+      "id": 33,
+      "scene": "guard-burst",
+      "reuse": false,
+      "narration_te": "గార్డు విజిల్ ఊదుతూ దూసుకొచ్చాడు — నీ బ్లడీ సామాను తీసుకొని బయటకి వెళ్లు!",
+      "onscreen_te": "గార్డు వచ్చాడు!",
+      "video_prompt": "Animated comedy film scene. a red-uniformed @Guard bursts into the compartment blowing a whistle hard, cheeks puffed, pointing furiously at the exit; @Parvateesam (THE SAME MAN IN EVERY SHOT, with a HUGE bold black upward-curled handlebar mustache clearly on his face, tall black top hat, black tailcoat with tails, white cravat bow, white dhoti, bright red briefcase, rolled green bedroll) sits innocently amid scattered papads and pickles, blinking. lively comic framing, gentle push-ins and snap-zooms on reaction beats, bouncy cartoon energy, no Ken Burns, no slow stretch. polished animated comedy film look, warm vintage 1920s sepia base with bright saturated character pops, soft diffused cinematic lighting, gentle film grain, charming stylized 3D-2D toon render, exaggerated cartoon physics. no text",
+      "dur": 4.542,
+      "vo_dur": 4.243,
+      "chars": [
+        "@Parvateesam",
+        "@Guard"
+      ]
+    },
+    {
+      "id": 36,
+      "scene": "cooksman-rescue",
+      "chars": [
+        "@Parvateesam",
+        "@Cooksman"
+      ],
+      "dur": 5.792,
+      "vo_dur": 5.475,
+      "narration_te": "అప్పుడు ఆ చీర్ఫుల్ కుక్స్ మాన్ వచ్చి, నవ్వుతూ ఆ గలగలా సామాను బయటకి లాగడంలో సాయం చేశాడు!",
+      "onscreen_te": "కుక్స్ మాన్ సాయం!",
+      "video_prompt": "Animated comedy film scene. a cheerful @Cooksman in a white jacket and cap leans into the elegant train compartment doorway, laughing warmly, and grabs the end of @Parvateesam's (THE SAME MAN IN EVERY SHOT, with a HUGE bold black upward-curled handlebar mustache clearly on his face, tall black top hat, black tailcoat with tails, white cravat bow, white dhoti, bright red briefcase, rolled green bedroll) green bedroll to help drag the spilling luggage out into the corridor; @Parvateesam grins gratefully amid scattered papads. lively comic framing, gentle push-ins and snap-zooms on reaction beats, bouncy cartoon energy, no Ken Burns, no slow stretch. polished animated comedy film look, warm vintage 1920s sepia base with bright saturated character pops, soft diffused cinematic lighting, gentle film grain, charming stylized 3D-2D toon render, exaggerated cartoon physics. no text"
+    },
+    {
+      "id": 34,
+      "scene": "proud-close",
+      "reuse": false,
+      "narration_te": "పార్వతీశం గర్వంగా బ్లడీ సామాన్? ఓ యెస్ సార్! అన్నాడు. ఇలా మన బారిష్టర్ ఇంగ్లాండ్ సాహసం మొదలైంది — మరోసారి కలుద్దాం!",
+      "onscreen_te": "మరోసారి కలుద్దాం!",
+      "video_prompt": "Animated comedy film scene. @Parvateesam (THE SAME MAN IN EVERY SHOT, with a HUGE bold black upward-curled handlebar mustache clearly on his face, tall black top hat, black tailcoat with tails, white cravat bow, white dhoti, bright red briefcase, rolled green bedroll) stands up proudly grinning and tips his tall black top hat with a flourish while the @Guard fumes purple and a fancy @Lady peeks from behind a fan; a few papads still float down like confetti, warm comedic ending. lively comic framing, gentle push-ins and snap-zooms on reaction beats, bouncy cartoon energy, no Ken Burns, no slow stretch. polished animated comedy film look, warm vintage 1920s sepia base with bright saturated character pops, soft diffused cinematic lighting, gentle film grain, charming stylized 3D-2D toon render, exaggerated cartoon physics. no text",
+      "dur": 9.375,
+      "vo_dur": 9.152,
+      "chars": [
+        "@Parvateesam",
+        "@Lady",
+        "@Guard"
+      ]
+    }
+  ]
+}

@@ -2,7 +2,7 @@
 name: google-flow-agent-driver
 description: Drive Google Flow (labs.google/fx/tools/flow, Gemini "Omni Flash" video model) fully automated via the opencli Browser Bridge — build reusable named Characters, generate text-free 9:16/16:9 video clips that summon those characters by @name, download them, then assemble a finished reel (watermark removal + speed-up + Telugu/other-language VO + Remotion subtitles). Use whenever a reel or video clip needs to come out of Google Flow / Veo / Gemini Omni Flash. Triggers on "google flow", "flow omni flash", "make a reel with google flow", "gemini video", "veo video via web", "opencli flow automation", "flow character consistency", "@character flow".
 tier: general
-version: 3
+version: 4
 tags: [google-flow, gemini, veo, omni-flash, opencli, browser-automation, video, reel, instagram-reel-source]
 ---
 
@@ -11,6 +11,19 @@ tags: [google-flow, gemini, veo, omni-flash, opencli, browser-automation, video,
 End-to-end recipe for driving **Google Flow** (`labs.google/fx/tools/flow`, currently the Gemini **Omni Flash** video model) **directly through the browser** via the `opencli` Browser Bridge. Flow has **no public video API** — it's a web app, so we drive the real logged-in Chrome session. This is the Flow analogue of `[[grok-imagine-agent-driver]]`; Flow is usually the better choice because **native Characters give true cross-shot identity lock** and generation runs on the **subscription** (no metered API credit wall).
 
 **This is the canonical, production-ready reference for every future Gemini/Veo version.** It's **model-version-agnostic**: when Google ships a newer model, nothing here changes except which entry you pick in the settings popover's **model** list — the driver, characters, clip gen, watermark removal, continuous-VO, and Remotion assembly all hold. Proven end-to-end on a 19-shot Telugu devotional reel (`~/Downloads/insta_story/gemini_prod/`, ~115 s, 1080×1920).
+
+## ⚠️ CURRENT-UI FIXES (2026-05, Parvateesam reel) — read before driving
+
+The Flow composer UI changed; the older selectors here fail **silently**. Fixed scripts live in `flow-telugu-comedy-reel/scripts/`. Key fixes:
+- **Settings-menu options are icon-prefixed**: innerText is `play_circle\nVideo`, `crop_9_16\n9:16`. Exact-match `===` fails → composer stays in **Nano Banana IMAGE mode** → no video renders, poll times out at `ready:0`. Match with **regex on innerText** (normalize `\n`→`|`).
+- **Click "Video" FIRST**, then re-query the menu — duration options (4/6/8/10s) only appear after switching to Video.
+- **Cost ≈ 25 credits per 8s Omni Flash clip.** Budget hard (130 cr ≈ 5 clips). Reuse good clips; never regen one that's fine.
+- **Lock a hero to a USER MASTER IMAGE**: opencli can't upload files; user uploads once, then `PROJ/characters` → **Add from Project** → select → **Add to Character** → name → Done. BUT Flow re-renders in its own 3D style and **drops wardrobe/signature features** — repeat the exact outfit + most-distinctive feature (e.g. mustache) in EVERY shot prompt (drops first on wide shots).
+- **Pin the LOCATION** in each prompt ("INSIDE the compartment") or Veo carries the previous scene's setting.
+- For **authentic Telugu VO** use Google Cloud TTS `te-IN-Chirp3-HD` (see `telugu-voice-and-text`), not xAI.
+- **Render collision**: never two renders to one output path, never `cp` while rendering → corrupt H264. Render to a fresh path, validate, then copy.
+
+Full end-to-end orchestration (story→script→reel) is the **`flow-telugu-comedy-reel`** skill.
 
 ## The template (copy this and go)
 
