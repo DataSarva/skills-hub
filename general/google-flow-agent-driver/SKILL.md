@@ -81,6 +81,8 @@ Flow clips have the bottom-right "✦" watermark and the model's own audio. Fini
 3. **Voiceover** — for Telugu/Indic, do NOT rely on Omni's audio; use `[[telugu-voice-and-text]]` (xAI TTS `eve`/`Leo`) per shot, capture each duration.
 4. **Subtitles + final render** — **Remotion** (headless-Chromium HarfBuzz = correct Indic shaping; ffmpeg drawtext does NOT shape conjuncts). `OffthreadVideo muted` clips + per-shot `<Audio>` VO + synced subtitle + looped music bed → render 1080×1920. See `[[telugu-voice-and-text]]` for the comp.
 
+**Continuous voiceover (avoid the "burst…gap…burst" feel).** If each shot's narration is much shorter than its clip, the VO plays in bursts with dead silence between — disjointed. Fix: make the **VO the spine** — write fuller narration that flows as one continuous story, then set each shot's `dur = vo_dur + ~0.2s` breath and **time-fit the clip to that** (`ffmpeg setpts=PTS*(target/clip_len)`) so motion maps onto the spoken line. Result: voice covers ~97% of the reel with only natural breaths, every clip + caption synced to its line. (`bin/rebuild_continuous.sh` does exactly this.) Keep VO at 1.25× for a fast-but-clear pace.
+
 Backbone for the whole pipeline is a single `shots.json` (`id, scene, dur, chars, video_prompt, narration_te, onscreen_te, vo_dur`) that drives TTS, clip gen, and the Remotion timeline — exactly like the grok reel pipeline.
 
 ## Reusable scripts (in `~/Downloads/insta_story/gemini_prod/bin/`)

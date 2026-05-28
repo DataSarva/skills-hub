@@ -58,166 +58,166 @@
     {
       "id": 1,
       "scene": "hook",
-      "dur": 5.375,
+      "dur": 6.916,
       "chars": [
         "@Gajendra",
         "@Crocodile"
       ],
       "video_prompt": "@Gajendra the royal white elephant and @Crocodile the huge dark crocodile heave and strain against each other at the churning edge of a vast emerald lake; the elephant braces its legs and pulls back hard, water explodes upward in sheets, the crocodile thrashes its tail and drags forward; both are visibly exhausted, mud and spray fly, ripples ring outward; urgent handheld tracking at eye level, warm saffron-amber dawn god-rays over emerald water, cinematic devotional grade, subtle film grain, no text",
-      "narration_te": "వెయ్యి సంవత్సరాలు… ఒక ఏనుగు, ఒక మొసలి, ఒకే సరస్సులో పోరాడుతూనే ఉన్నాయి.",
+      "narration_te": "వెయ్యి సంవత్సరాలు… ఒక ఏనుగు, ఒక మొసలి, ఒకే సరస్సులో విడవకుండా పోరాడుతూనే ఉన్నాయి. ఎవరూ గెలవలేదు, ఎవరూ ఓడిపోలేదు.",
       "onscreen_te": "1000 సంవత్సరాలు?",
-      "vo_dur": 4.327
+      "vo_dur": 6.743
     },
     {
       "id": 2,
       "scene": "hook",
-      "dur": 4.042,
+      "dur": 6.917,
       "chars": [
         "@Gajendra",
         "@Crocodile"
       ],
       "video_prompt": "slow push toward @Gajendra's straining upward-rolled eye reflecting the golden sky while @Crocodile's jaws stay locked below the waterline; water trembles, breath mists, the elephant's trunk lifts weakly; brooding suspense, warm saffron-amber rim light against deep emerald shadow, handheld micro-shake, cinematic devotional grade, film grain, no text",
-      "narration_te": "కానీ విష్ణువు ఎందుకు అంత ఆలస్యం చేశాడు? అసలు కథ ఇది.",
+      "narration_te": "కానీ ఈ పోరాటం వెనుక ఒక లోతైన రహస్యం దాగి ఉంది. విష్ణువు ఎందుకు అంత ఆలస్యం చేశాడు? అసలు కథ ఇదిగో వినండి.",
       "onscreen_te": "",
-      "vo_dur": 3.385
+      "vo_dur": 6.785
     },
     {
       "id": 3,
       "scene": "indradyumna_past",
-      "dur": 5.375,
+      "dur": 6.583,
       "chars": [
         "@Indradyumna"
       ],
       "video_prompt": "@Indradyumna the proud young king strides across a sunlit marble palace hall, robes and gold jewelry swaying, chin raised arrogantly, attendants bowing as he sweeps past without a glance; banners ripple, dust motes drift in shafts of warm light; smooth handheld follow, opulent golden palace lighting, cinematic devotional grade, film grain, no text",
-      "narration_te": "ఒకప్పుడు గజేంద్రుడు… ఇంద్రద్యుమ్నుడు అనే గర్విష్ఠి రాజు.",
+      "narration_te": "ఒకప్పుడు ఈ గజేంద్రుడు ఇంద్రద్యుమ్నుడు అనే గొప్ప రాజు. కానీ తన అధికారంతో, గర్వంతో పూర్తిగా మునిగిపోయాడు.",
       "onscreen_te": "పూర్వ జన్మ",
-      "vo_dur": 3.036
+      "vo_dur": 6.42
     },
     {
       "id": 4,
       "scene": "indradyumna_past",
-      "dur": 5.375,
+      "dur": 6.583,
       "chars": [
         "@Indradyumna",
         "@Agastya"
       ],
       "video_prompt": "@Agastya the white-bearded sage walks into the palace hall expecting welcome, but @Indradyumna remains seated and turns his face away dismissively, waving a careless hand; the sage halts, robes settling, his expression hardening; courtiers freeze; tense handheld at eye level, warm palace light cooling toward shadow, cinematic devotional grade, film grain, no text",
-      "narration_te": "అగస్త్య మహర్షి వచ్చినప్పుడు, రాజు గర్వంతో ఆయనను గౌరవించలేదు.",
+      "narration_te": "ఒకరోజు అగస్త్య మహర్షి ఆయన దగ్గరకు వచ్చారు. గర్వంతో ఉన్న రాజు ఆయనను గమనించను కూడా లేదు, గౌరవించలేదు.",
       "onscreen_te": "",
-      "vo_dur": 3.52
+      "vo_dur": 6.403
     },
     {
       "id": 5,
       "scene": "indradyumna_past",
-      "dur": 5.375,
+      "dur": 5.292,
       "chars": [
         "@Agastya",
         "@Indradyumna"
       ],
       "video_prompt": "@Agastya raises his hand and points sharply at @Indradyumna, beard and matted hair lifting, eyes blazing as he pronounces a curse; a ripple of energy distorts the air and the king recoils, shielding his face, his form beginning to shimmer; embers and dust swirl; urgent handheld push-in, incandescent saffron-amber flare against burnt-crimson shadow, cinematic devotional grade, film grain, no text",
-      "narration_te": "కోపించిన మహర్షి శపించాడు — ఏనుగువై జన్మించు అని.",
+      "narration_te": "కోపించిన మహర్షి శపించాడు — నీ గర్వం ఏనుగు మదంలాంటిది, ఏనుగువై జన్మించు అని.",
       "onscreen_te": "శాపం",
-      "vo_dur": 3.292
+      "vo_dur": 5.033
     },
     {
       "id": 6,
       "scene": "huhu_past",
-      "dur": 5.375,
+      "dur": 5.292,
       "chars": [
         "@Huhu"
       ],
       "video_prompt": "@Huhu the handsome celestial gandharva drifts playfully through a shimmering heavenly garden of glowing lotuses and floating petals, laughing, strumming a divine instrument, robes trailing light; soft clouds part around him; graceful handheld drift, ethereal warm-gold celestial glow, cinematic devotional grade, film grain, no text",
-      "narration_te": "ఇక మొసలి… పూర్వజన్మలో హుహు అనే గంధర్వ రాజు.",
+      "narration_te": "ఇక ఆ మొసలి కథ కూడా విచిత్రమైనదే. పూర్వజన్మలో అతడు హుహు అనే అందమైన గంధర్వ రాజు.",
       "onscreen_te": "",
-      "vo_dur": 2.886
+      "vo_dur": 5.053
     },
     {
       "id": 7,
       "scene": "huhu_past",
-      "dur": 5.375,
+      "dur": 6.083,
       "chars": [
         "@Huhu",
         "@Devala"
       ],
       "video_prompt": "@Devala the grave sage stands waist-deep in a clear celestial river in meditation when @Huhu mischievously lunges underwater and yanks the sage's ankle, pulling him off balance; water splashes up, the sage's arms fly out, his serene face snapping to alarm then anger; playful-turned-grave energy, handheld at water level, warm dawn light on rippling water, cinematic devotional grade, film grain, no text",
-      "narration_te": "దేవల మహర్షి స్నానం చేస్తుండగా, హుహు ఆయన కాలును పట్టి లాగాడు.",
+      "narration_te": "ఒకసారి దేవల మహర్షి నదిలో స్నానం చేస్తుండగా, హుహు అల్లరిగా ఆయన కాలును నీటిలోకి లాగాడు.",
       "onscreen_te": "",
-      "vo_dur": 3.771
+      "vo_dur": 5.895
     },
     {
       "id": 8,
       "scene": "huhu_past",
-      "dur": 5.375,
+      "dur": 5.25,
       "chars": [
         "@Devala",
         "@Huhu"
       ],
       "video_prompt": "@Devala rises from the water pointing a trembling wrathful finger at @Huhu, who staggers back as a wave of curse-energy washes over him and his form begins to shimmer and lengthen toward a reptilian shape; spray and light distort the air; urgent handheld push-in, saffron-amber flare over emerald water and deep shadow, cinematic devotional grade, film grain, no text",
-      "narration_te": "మహర్షి శాపంతో అతడు మొసలిగా మారిపోయాడు.",
+      "narration_te": "దానికి కోపించిన మహర్షి శపించాడు, ఆ క్షణమే హుహు భయంకరమైన మొసలిగా మారిపోయాడు.",
       "onscreen_te": "మరో శాపం",
-      "vo_dur": 2.449
+      "vo_dur": 5.003
     },
     {
       "id": 9,
       "scene": "struggle",
-      "dur": 5.375,
+      "dur": 5.542,
       "chars": [
         "@Gajendra",
         "@Crocodile"
       ],
       "video_prompt": "wide shot of the vast lake at golden hour as @Gajendra and @Crocodile lock together again, the elephant rearing and twisting, the crocodile rolling its armored body; huge sheets of water burst and rain down, waves slam the shore, birds scatter; powerful momentum and impact, urgent handheld tracking, warm saffron-amber light raking across emerald water, cinematic devotional grade, motion blur, film grain, no text",
-      "narration_te": "రెండు శాపాలు… ఒకే సరస్సులో కలిశాయి.",
+      "narration_te": "ఇలా రెండు శాపాలు ఒకే సరస్సులో కలిశాయి. ఏనుగూ, మొసలీ ప్రాణాలకు తెగించి పోరాడసాగాయి.",
       "onscreen_te": "",
-      "vo_dur": 2.37
+      "vo_dur": 5.336
     },
     {
       "id": 10,
       "scene": "struggle",
-      "dur": 5.375,
+      "dur": 5.833,
       "chars": [
         "@Gajendra",
         "@Crocodile"
       ],
       "video_prompt": "tight churning shot as @Crocodile clamps onto @Gajendra's front leg and thrashes side to side while the elephant trumpets and pulls back with all its weight, muscles straining, water and mud spraying in arcs; relentless struggle, handheld micro-shake at eye level, warm amber light cutting through emerald spray, cinematic devotional grade, motion blur, film grain, no text",
-      "narration_te": "వెయ్యేళ్లు… విడవకుండా పోరాడుతూనే ఉన్నాయి.",
+      "narration_te": "వెయ్యేళ్లపాటు ఆ పోరాటం సాగింది. మొసలి కాలును గట్టిగా పట్టుకుంది, ఏనుగు తన బలమంతా ఉపయోగించింది.",
       "onscreen_te": "",
-      "vo_dur": 2.565
+      "vo_dur": 5.63
     },
     {
       "id": 11,
       "scene": "struggle",
-      "dur": 5.375,
+      "dur": 6.791,
       "chars": [
         "@GajendraPain"
       ],
       "video_prompt": "@GajendraPain the exhausted trembling elephant sinks lower into the water, one leg clamped below, its strength visibly failing, sides heaving, eyes beginning to lift upward; ripples settle around it, light dims toward dusk; slow handheld settle, mournful warm-amber half-light over darkening emerald water, cinematic devotional grade, film grain, no text",
-      "narration_te": "గజేంద్రుని బలం క్షీణించింది. కాలు మొసలి నోటిలో చిక్కుకుంది.",
+      "narration_te": "కానీ కాలం గడిచేకొద్దీ గజేంద్రుని బలం తగ్గిపోసాగింది. ఇక తన శక్తితో గెలవడం అసాధ్యమని అతనికి అర్థమైంది.",
       "onscreen_te": "",
-      "vo_dur": 3.237
+      "vo_dur": 6.61
     },
     {
       "id": 12,
       "scene": "surrender",
-      "dur": 5.375,
+      "dur": 7.125,
       "chars": [
         "@GajendraPain"
       ],
       "video_prompt": "@GajendraPain stops struggling and grows still, lifting its head and trunk slowly toward the sky in dawning realization, eyes filling with surrender and devotion; the water calms to glass, first warm light touches its face; reverent slow handheld rise, soft golden god-rays breaking over the lake, cinematic devotional grade, film grain, no text",
-      "narration_te": "అప్పుడు గజేంద్రుడు తన బలాన్ని నమ్ముకోవడం మానేశాడు.",
+      "narration_te": "అప్పుడే గజేంద్రునికి ఒక సత్యం బోధపడింది. తన బలాన్ని నమ్ముకోవడం మాని, భగవంతుని శరణు వేడాలని నిర్ణయించుకున్నాడు.",
       "onscreen_te": "శరణాగతి",
-      "vo_dur": 2.699
+      "vo_dur": 6.93
     },
     {
       "id": 13,
       "scene": "surrender",
-      "dur": 6.708,
+      "dur": 5.958,
       "chars": [
         "@GajendraPain"
       ],
       "video_prompt": "@GajendraPain curls its trunk down to the water, plucks a single glowing pink lotus, and lifts it high overhead as an offering toward the heavens; droplets fall in slow sparkling arcs, the lotus catches radiant light; tender deliberate motion, warm saffron-amber god-rays streaming down onto the elephant and lotus, cinematic devotional grade, film grain, no text",
-      "narration_te": "తొండంతో ఒక పద్మాన్ని ఎత్తి, విష్ణువుకు అర్పించాడు.",
+      "narration_te": "తన తొండంతో ఒక అందమైన పద్మాన్ని ఎత్తి, ఆకాశం వైపు చూస్తూ విష్ణువుకు భక్తితో సమర్పించాడు.",
       "onscreen_te": "",
-      "vo_dur": 2.699
+      "vo_dur": 5.722
     },
     {
       "id": 14,
@@ -227,73 +227,73 @@
         "@GajendraPain"
       ],
       "video_prompt": "serene devotional close shot of @Gajendra the white elephant lifting its head and trunk skyward in calm heartfelt prayer while holding a glowing pink lotus, eyes peaceful and full of faith, soft warm light blooming around it; gentle reverent motion, radiant golden devotional glow, emerald water bokeh behind, cinematic devotional grade, film grain, no text",
-      "narration_te": "నన్ను రక్షించు స్వామీ అని హృదయపూర్వకంగా శరణాగతి చేశాడు.",
+      "narration_te": "నీవే నా రక్ష స్వామీ, నన్ను కాపాడు అని హృదయపూర్వకంగా పూర్తి శరణాగతి చేశాడు.",
       "onscreen_te": "",
-      "vo_dur": 3.379
+      "vo_dur": 5.17
     },
     {
       "id": 15,
       "scene": "vishnu_arrival",
-      "dur": 6.708,
+      "dur": 5.25,
       "chars": [
         "@Vishnu",
         "@Garuda"
       ],
       "video_prompt": "@Vishnu the radiant blue four-armed deity descends from a burst of divine light astride @Garuda the great golden-winged eagle, wings sweeping down hard and throwing back clouds, silk and garlands streaming, the Sudarshana Chakra spinning brilliantly on a finger; clouds part, golden rays explode outward; majestic powerful descent, urgent handheld upward tracking, blinding saffron-gold celestial radiance, cinematic devotional grade, motion blur, film grain, no text",
-      "narration_te": "ఆ క్షణమే… గరుడవాహనుడై విష్ణువు దిగివచ్చాడు.",
+      "narration_te": "ఆ పిలుపు వినగానే, ఒక్క క్షణం కూడా ఆలస్యం చేయకుండా గరుడవాహనుడై విష్ణువు దిగివచ్చాడు.",
       "onscreen_te": "విష్ణువు",
-      "vo_dur": 2.751
+      "vo_dur": 5.001
     },
     {
       "id": 16,
       "scene": "vishnu_arrival",
-      "dur": 5.375,
+      "dur": 4.125,
       "chars": [
         "@Vishnu"
       ],
       "video_prompt": "@Vishnu releases the spinning Sudarshana Chakra, a blazing wheel of golden light that streaks across the lake; where it passes a brilliant radiance blooms over the water and the crocodile's dark form dissolves peacefully into rising motes of light, freed; water glows, ripples of light expand; benevolent divine release, no blade or claw touching a victim, urgent handheld, incandescent saffron-gold light over emerald water, cinematic devotional grade, motion blur, film grain, no text",
-      "narration_te": "సుదర్శన చక్రం ప్రయోగించి, మొసలిని విముక్తి చేశాడు.",
+      "narration_te": "తన సుదర్శన చక్రాన్ని ప్రయోగించి, మొసలిని ఆ శాపం నుండి విముక్తి చేశాడు.",
       "onscreen_te": "",
-      "vo_dur": 2.754
+      "vo_dur": 3.878
     },
     {
       "id": 17,
       "scene": "moksha",
-      "dur": 5.375,
+      "dur": 5.833,
       "chars": [
         "@Vishnu",
         "@Gajendra"
       ],
       "video_prompt": "@Vishnu gently lifts the freed @Gajendra from the water with a radiant hand as the elephant rises restored and whole, trunk curling upward in joy; two soft luminous spirits ascend together into the golden sky; relief and grace, slow handheld rise, warm radiant god-rays flooding the calm lake, cinematic devotional grade, film grain, no text",
-      "narration_te": "గజేంద్రుడూ, మొసలీ — ఇద్దరికీ మోక్షం లభించింది.",
+      "narration_te": "అదే క్షణంలో గజేంద్రుడూ, మొసలీ — ఇద్దరికీ మోక్షం లభించింది. వారి శాపాలన్నీ తొలగిపోయాయి.",
       "onscreen_te": "మోక్షం",
-      "vo_dur": 2.912
+      "vo_dur": 5.65
     },
     {
       "id": 18,
       "scene": "moksha",
-      "dur": 5.375,
+      "dur": 8.083,
       "chars": [
         "@Vishnu",
         "@Gajendra"
       ],
       "video_prompt": "serene close shot of @Vishnu's calm radiant face turning down toward @Gajendra with a gentle protective smile, one hand raised in blessing, the elephant resting its head against him; light pulses warmly between them; tender stillness with breathing motion, soft handheld, glowing saffron-gold devotional light, cinematic devotional grade, film grain, no text",
-      "narration_te": "విష్ణువు ఆలస్యం చేయలేదు… పూర్తి శరణాగతి కోసమే వేచి ఉన్నాడు.",
+      "narration_te": "నిజానికి విష్ణువు ఆలస్యం చేయలేదు. గజేంద్రుడు తన గర్వాన్ని పూర్తిగా విడిచి, మనస్ఫూర్తిగా శరణు వేడే ఆ క్షణం కోసమే వేచి ఉన్నాడు.",
       "onscreen_te": "",
-      "vo_dur": 3.576
+      "vo_dur": 7.92
     },
     {
       "id": 19,
       "scene": "conclusion",
-      "dur": 5.375,
+      "dur": 6.125,
       "chars": [
         "@Vishnu",
         "@Gajendra"
       ],
       "video_prompt": "final wide shot of @Vishnu blessing @Gajendra at the edge of a glassy golden lake at sunrise, light radiating outward in vast warm god-rays, lotuses blooming across the water, the scene breathing with gentle motion; transcendent peace, slow handheld settle, luminous saffron-amber devotional glow, cinematic devotional grade, film grain, no text",
-      "narration_te": "భక్తి, పూర్తి శరణాగతి కంటే గొప్పది ఏదీ లేదు.",
+      "narration_te": "అదే ఈ కథ చెప్పే గొప్ప సత్యం. భక్తి, పూర్తి శరణాగతి కంటే గొప్పది ఈ లోకంలో మరేదీ లేదు.",
       "onscreen_te": "శరణాగతి",
-      "vo_dur": 2.816
+      "vo_dur": 5.934
     }
   ]
 }
