@@ -44,6 +44,6 @@ for t in 1 2 3 4 5; do
   sleep 2
 done
 [ -n "$NEW" ] && [ "$NEW" != "$BEFORE_FILES" ] || { echo "[shot$ID] download failed"; exit 3; }
-mkdir -p "$(dirname "$OUT")"; cp "$NEW" "$OUT"
+mkdir -p "$(dirname "$OUT")"; mv "$NEW" "$OUT"   # move (not copy) so nothing piles up in ~/Downloads
 oc keys Escape >/dev/null 2>&1
 echo "[shot$ID] saved $OUT ($(ffprobe -v error -show_entries format=duration -of default=nk=1:nw=1 "$OUT")s)"
