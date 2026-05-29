@@ -120,8 +120,15 @@ length so audio+video stay in sync automatically.**
    and **time-fits each clean clip to its VO length** (single setpts), so motion maps onto narration.
 3. `gen_timeline.py` → `timeline.json`; repoint `remotion/public/audio` + `clips` symlinks to the gender
    dirs; `npx remotion render Reel`.
-4. Mix the music bed: `ffmpeg -i render.mp4 -stream_loop -1 -i music/bed.wav -filter_complex
-   "[1:a]volume=0.16[m];[0:a][m]amix=inputs=2:duration=first" -map 0:v -map "[a]" -c:v copy -shortest out.mp4`.
+4. Mix the music bed **and loudness-normalize the VO** — the VO must be social-loud or the reel sounds
+   dull/quiet (a real bug we hit: plain `amix` auto-halves the VO by ~6 dB → mean ≈ -28 dB). Fix:
+   normalize VO to **-14 LUFS**, keep music low, and use **`amix normalize=0`** so the VO is not attenuated:
+   ```bash
+   ffmpeg -i render.mp4 -stream_loop -1 -i music/bed.wav -filter_complex \
+     "[0:a]loudnorm=I=-14:TP=-1.0:LRA=11[vo];[1:a]volume=0.08[m];[vo][m]amix=inputs=2:normalize=0:duration=first[a]" \
+     -map 0:v -map "[a]" -c:v copy -c:a aac -b:a 192k -shortest out.mp4
+   ```
+   Target ≈ -14 LUFS / mean ≈ -14 to -16 dB / max near -1 dB. Keep VO speed at `VO_X=1.25` (do not slow it).
 5. Restore original symlinks + `timeline.json` afterward so the project is left as-found.
 
 Worked end-to-end script: `~/Downloads/insta_story/flow_parvateesam/bin/build_voice_preview.sh`
