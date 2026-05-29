@@ -136,6 +136,49 @@ Worked end-to-end script: `~/Downloads/insta_story/flow_parvateesam/bin/build_vo
 
 ---
 
+## Part 3 — Scene SFX / foley (frame-accurate, makes it convincing)
+
+A reel with only VO + music sounds bare. Add scene sound design — but **match each cue to what's
+actually on screen and when**, not to blind time windows (a blind pass put train sounds on a village
+shot and a laugh-bed before the gag → user rejected it).
+
+**Process that worked (parvateesam):**
+1. **See the frames first.** Extract a 6-frame contact sheet per shot from the *rendered* video
+   (`ffmpeg -ss <t> -i out.mp4 -frames:v 1 ...` then `hstack`), Read them, and write down the exact
+   second each event peaks (jump, luggage fall, steam burst, slinky-spring, scream, guard whistle,
+   hat-tip). Read each shot's `video_prompt` too — it states the action.
+2. **Source the RIGHT sound by category.** mixkit free SFX pages are type-grouped, so *any* item under
+   `/scream/`, `/laugh/`, `/whoosh/`, `/cartoon/`, `/impact/`, `/thud/`, `/win/`, `/ambience/`, `/bird/`
+   is that sound. Harvest preview URLs from raw HTML:
+   `curl -s https://mixkit.co/free-sound-effects/<cat>/ | grep -oE 'sfx/[0-9]+/[0-9]+-preview\.mp3'`
+   → download `https://assets.mixkit.co/active_storage/sfx/<id>/<id>-preview.mp3`. Pick by duration
+   (long = ambience bed, short = one-shot hit). No `steam` category — **synthesize** it:
+   `ffmpeg -f lavfi -i "anoisesrc=d=3.4:c=pink:a=0.6" -af "highpass=f=1200,lowpass=f=7000,afade=t=in:d=0.5,afade=t=out:st=2.2:d=1.2" steam.mp3`. SFX are CC0 (mixkit) — fine to publish.
+3. **Cue sheet + mixer (reproducible, beats wiring Remotion audio).** `sfx_cues.json` = list of
+   `{file, at(sec), vol, [trim, fadein, fadeout]}`; `bin/sfx_mix.py` builds the ffmpeg `adelay`/`afade`
+   graph, mixes over the VO render + music, loudnorm's the VO, encodes IG-spec. Edit a number, re-run.
+   Frame-accurate placement does NOT need a heavier tool — exact-ms `adelay` IS frame-accurate.
+
+**Hard-won SFX rules (user feedback):**
+- **End every reel with a comedy sting on the final comedic beat** (a cartoon/`win` sting ~1–2s before
+  the end) — punctuates the joke. Don't bury it mid-video.
+- **Don't reuse a cartoon "boing"** across shots — it reads as an irritating recurring bell.
+- **Check scream gender** — a "scream" SFX that's male on a female character is jarring; audition/replace.
+- One ambience bed per *location* (village birds ≠ station reverb ≠ train-interior rumble); cut the bed
+  when the location changes. Keep tense beats (pre-gag) quiet — no crowd/laugh bed before the payoff.
+
+## Part 4 — Publish to IG + YouTube
+
+Both live next to contentgen (`~/Documents/insta_ai_vid`, `iex contentgen --` creds). Final file must be
+1080×1920 H.264 High **yuv420p** 30fps + AAC 48k + `+faststart`, validated by
+`instagram-reel-publish/scripts/validate_reel.sh`. A 67s vertical is fine on both (IG Reels ≤~3min;
+YouTube Shorts ≤3min when `#Shorts` is in the title/description).
+- **IG:** `[[instagram-reel-publish]]` — `instagram_upload.py --video … --caption-file caption.json --cover cover.jpg` (caption = logline + hashtags).
+- **YT:** `[[youtube-shorts-publish]]` — `youtube_upload.py upload --video … --metadata-file yt_metadata.json` (title needs `#Shorts`).
+- **Deleting an old YT** needs `youtube.force-ssl` scope; the stored token is `youtube.upload`-only →
+  `videos().delete()` returns **403**. Delete old ones via YouTube Studio UI, or re-run `setup` with the
+  broader scope. Re-post new first, then delete old.
+
 ## Memory pointers
 Live picks/verdicts also stored in this host's auto-memory `reference_gemini_tts_telugu.md`. Related:
 [[telugu-voice-and-text]] (subtitle rendering), [[flow-telugu-comedy-reel]] (full reel pipeline),
