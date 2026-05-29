@@ -12,9 +12,12 @@ description: >-
   "make a telugu reel", "parvateesam reel", "flow comedy reel", "telugu story to video", "character reel with
   my reference image", "authentic telugu voiceover reel".
 tier: general
-version: 1
+version: 2
 tags: [google-flow, veo, telugu, tts, cloud-tts, chirp3, reel, character-consistency, remotion, comedy, instagram]
 ---
+
+
+> 🎬 **Child of the [[insta-video]] master reel pipeline.** Voice = [[telugu-raw-reel-voice]] · Telugu subs = [[telugu-voice-and-text]] · scene SFX/foley = [[reel-sfx-foley]] · publish = [[instagram-reel-publish]] / [[youtube-shorts-publish]].
 
 # Flow → authentic-Telugu comedy reel (end to end)
 

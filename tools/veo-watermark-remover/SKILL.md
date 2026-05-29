@@ -2,9 +2,12 @@
 name: veo-watermark-remover
 description: Remove the Google Veo / Gemini "✦" sparkle watermark from generated videos (and Gemini image watermarks) using allenk's VeoWatermarkRemover CLI — deterministic reverse-alpha-blending, no AI hallucination, no quality loss, audio passthrough. Use whenever a clip came out of Google Flow / Veo / Gemini Omni Flash and needs the corner watermark gone before publishing. Triggers on "remove veo watermark", "remove gemini watermark", "flow clip has a watermark", "veo sparkle", "clean the google video watermark".
 tier: tools
-version: 1
+version: 2
 tags: [veo, gemini, flow, watermark, video, ffmpeg, post-processing]
 ---
+
+
+> 🎬 **Child of the [[insta-video]] master reel pipeline.** Voice = [[telugu-raw-reel-voice]] · Telugu subs = [[telugu-voice-and-text]] · scene SFX/foley = [[reel-sfx-foley]] · publish = [[instagram-reel-publish]] / [[youtube-shorts-publish]].
 
 # Veo / Gemini watermark remover
 

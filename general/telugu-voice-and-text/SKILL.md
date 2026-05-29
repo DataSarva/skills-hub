@@ -9,9 +9,12 @@ description: >-
   with Remotion + Noto Sans Telugu (Chromium does full HarfBuzz shaping), synced to the VO.
   Proven end-to-end in the prahaladhudu v3 devotional reel.
 tier: general
-version: 2
+version: 3
 tags: [telugu, tts, voiceover, subtitles, captions, remotion, xai, cloud-tts, chirp3, noto-sans-telugu, indic, reels]
 ---
+
+
+> 🎬 **Child of the [[insta-video]] master reel pipeline.** Voice = [[telugu-raw-reel-voice]] · Telugu subs = [[telugu-voice-and-text]] · scene SFX/foley = [[reel-sfx-foley]] · publish = [[instagram-reel-publish]] / [[youtube-shorts-publish]].
 
 # Telugu voice + Telugu text (the two things that always go wrong)
 

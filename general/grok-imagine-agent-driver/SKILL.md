@@ -3,8 +3,11 @@ name: grok-imagine-agent-driver
 description: Drive grok.com/imagine Agent (Beta) canvas via opencli browser bridge. Two-phase gated workflow - STRICT character ref sheet validation, then LOOSE batch video generation, then Grok native Stitch (or ffmpeg fallback). Use for character refs, multi-shot reels with identity lock, then downloading. Covers current DOM selectors (data-imagine-agent-toggle, Send vs Submit, ProseMirror composer, canvas resume), video quirks (6s cap, 9:16 inconsistent, voice-by-default audio), full-UUID polling, in-page fetch download, drift handling, and the agent-hallucinates-success-when-quota-hit failure mode. Triggers on "grok imagine", "grok agent mode", "make a reel with grok", "character consistency grok", "grok stitch", "opencli grok automation", "download grok video".
 tier: general
 tags: [grok, video, opencli, browser-automation, instagram-reel-source]
-version: 2
+version: 3
 ---
+
+
+> 🎬 **Child of the [[insta-video]] master reel pipeline.** Voice = [[telugu-raw-reel-voice]] · Telugu subs = [[telugu-voice-and-text]] · scene SFX/foley = [[reel-sfx-foley]] · publish = [[instagram-reel-publish]] / [[youtube-shorts-publish]].
 
 # Grok Imagine Agent Driver
 

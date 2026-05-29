@@ -12,8 +12,11 @@ description: >-
   model choice, the reusable gemini_tts.sh helper, and the re-voice-an-existing-reel flow.
 tier: general
 tags: [telugu, tts, voiceover, gemini-tts, cloud-tts, raw-accent, telangana, storytelling, reels, story-writing]
-version: 1
+version: 2
 ---
+
+
+> 🎬 **Child of the [[insta-video]] master reel pipeline.** Voice = [[telugu-raw-reel-voice]] · Telugu subs = [[telugu-voice-and-text]] · scene SFX/foley = [[reel-sfx-foley]] · publish = [[instagram-reel-publish]] / [[youtube-shorts-publish]].
 
 # Telugu raw reel — story writing + human voice (DEFAULT)
 

@@ -3,8 +3,11 @@ name: instagram-reel-publish
 description: Publish a finished MP4 to Instagram as a Reel using instagrapi via the contentgen Python venv. Reads IG credentials from Infisical (folder `contentgen`, secrets `IG_USERNAME` / `IG_PASSWORD`) via the iex wrapper — never hardcode creds. Wraps `lib/platforms/instagram_upload.py` in `~/Documents/insta_ai_vid` and the persistent `.instagram_session.json`. Use when the user says "upload to Instagram", "post the reel", "ship to IG", "publish the reel", "post to insta", "drop on Instagram", "upload reel.mp4", or any variant of pushing a finished video to the @aisarva_ Instagram account. Covers pre-upload validation (1080×1920, H.264, AAC, 3–90s), caption JSON format, cover thumbnail, post-publish caption edit, deletion, session expiry, and rate-limit handling.
 tier: general
 tags: [instagram, publishing, instagrapi, contentgen, reel, infisical]
-version: 1
+version: 2
 ---
+
+
+> 🎬 **Child of the [[insta-video]] master reel pipeline.** Voice = [[telugu-raw-reel-voice]] · Telugu subs = [[telugu-voice-and-text]] · scene SFX/foley = [[reel-sfx-foley]] · publish = [[instagram-reel-publish]] / [[youtube-shorts-publish]].
 
 # instagram-reel-publish
 

@@ -3,8 +3,11 @@ name: frames-to-reel-ffmpeg
 description: Assemble N still storyboard frames (1080×1920 9:16 JPGs) into one Instagram-ready MP4 reel using ffmpeg — per-shot Ken Burns motion (slow zoom in/out/pan-down/pan-up), crossfade concatenation, and a silent AAC track so IG accepts the upload. Use whenever the user has source frames but no native motion video — typically the fallback when Grok Imagine video quota is hit and only the storyboard images survived, OR when the workflow is intentionally still-only (riddles, quotes, captioned posters). Triggers on "assemble reel from frames", "ken burns", "stills to video", "ffmpeg storyboard", "frames to mp4", "build reel from images", "stitch jpgs into reel", or any variant of turning static images into a 9:16 reel.
 tier: general
 tags: [ffmpeg, video, reel, instagram, ken-burns, fallback]
-version: 1
+version: 2
 ---
+
+
+> 🎬 **Child of the [[insta-video]] master reel pipeline.** Voice = [[telugu-raw-reel-voice]] · Telugu subs = [[telugu-voice-and-text]] · scene SFX/foley = [[reel-sfx-foley]] · publish = [[instagram-reel-publish]] / [[youtube-shorts-publish]].
 
 # frames-to-reel-ffmpeg
 

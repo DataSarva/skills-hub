@@ -2,9 +2,12 @@
 name: youtube-shorts-publish
 description: Publish a finished vertical MP4 to YouTube as a Short via the youtube_upload.py script in the contentgen project (Google OAuth, googleapiclient). Reads a long-lived refresh token; creds via the iex contentgen wrapper. Use when the user says "upload to youtube", "post the short", "publish to youtube shorts", "ship to YT", or wants a reel cross-posted to YouTube. Covers metadata JSON, Shorts requirements (vertical ≤60s + #Shorts), the .venv-python and don't-pipe-tail gotchas, OAuth setup, and deletion.
 tier: general
-version: 1
+version: 2
 tags: [youtube, shorts, video, reel, publishing, oauth, contentgen]
 ---
+
+
+> 🎬 **Child of the [[insta-video]] master reel pipeline.** Voice = [[telugu-raw-reel-voice]] · Telugu subs = [[telugu-voice-and-text]] · scene SFX/foley = [[reel-sfx-foley]] · publish = [[instagram-reel-publish]] / [[youtube-shorts-publish]].
 
 # youtube-shorts-publish
 

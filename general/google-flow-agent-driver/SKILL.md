@@ -2,9 +2,12 @@
 name: google-flow-agent-driver
 description: Drive Google Flow (labs.google/fx/tools/flow, Gemini "Omni Flash" video model) fully automated via the opencli Browser Bridge — build reusable named Characters, generate text-free 9:16/16:9 video clips that summon those characters by @name, download them, then assemble a finished reel (watermark removal + speed-up + Telugu/other-language VO + Remotion subtitles). Use whenever a reel or video clip needs to come out of Google Flow / Veo / Gemini Omni Flash. Triggers on "google flow", "flow omni flash", "make a reel with google flow", "gemini video", "veo video via web", "opencli flow automation", "flow character consistency", "@character flow".
 tier: general
-version: 4
+version: 5
 tags: [google-flow, gemini, veo, omni-flash, opencli, browser-automation, video, reel, instagram-reel-source]
 ---
+
+
+> 🎬 **Child of the [[insta-video]] master reel pipeline.** Voice = [[telugu-raw-reel-voice]] · Telugu subs = [[telugu-voice-and-text]] · scene SFX/foley = [[reel-sfx-foley]] · publish = [[instagram-reel-publish]] / [[youtube-shorts-publish]].
 
 # Google Flow agent driver — production reel template
 
