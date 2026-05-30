@@ -85,3 +85,13 @@ reference implementation lives at `~/Downloads/insta_story/flow_parvateesam/bin/
 [[insta-video]] (parent/orchestrator) · [[telugu-raw-reel-voice]] (VO + the re-voice/render flow this
 mixes onto) · [[flow-telugu-comedy-reel]] / [[google-flow-agent-driver]] / [[grok-imagine-agent-driver]]
 (produce the clips) · [[instagram-reel-publish]] / [[youtube-shorts-publish]] (publish the mixed file).
+
+## Cinematic (non-comedy) foley + anthem (2026-05-30, Telangana reel)
+
+- For a **cinematic/history** reel, swap the "comedy sting" rule for an **anthem vocal swell on the climax
+  beat** (the emotional payoff) over a **famous-song instrumental bed** (e.g. flute version) kept low.
+- **Content-aware cue generator** (`bin/gen_sfx_cues.py`, packaged in [[insta-reel-scaffold]]): a per-shot
+  RECIPE keyed by known scene (fire crackle on tribe/fire, war_amb+horses on the battle, crowd_cheer
+  +fireworks on the celebration, quiet on the inscription) → emits `sfx_cues_<g>.json` with absolute
+  times from cumulative shot durations. One ambience bed per location, cut on location change.
+- Reuse parvateesam `sfx_mix.py` (VO loudnorm ≈ -13/-12, music ≈ 0.06, `amix normalize=0`, limiter).

@@ -186,3 +186,20 @@ YouTube Shorts ≤3min when `#Shorts` is in the title/description).
 Live picks/verdicts also stored in this host's auto-memory `reference_gemini_tts_telugu.md`. Related:
 [[telugu-voice-and-text]] (subtitle rendering), [[flow-telugu-comedy-reel]] (full reel pipeline),
 [[project_reelforge]] (autoresearch loop that can A/B these voices).
+
+## Learnings (2026-05-30, Telangana reel)
+
+- **HARD RULE: never use "బై" anywhere, any voice, ever** (user directive — not just female). Drop all
+  gendered address → one script serves both male & female.
+- **Clapback hook prompt** (open on anger, questioning existence): *"Speak with sharp anger and
+  disbelief — someone just denied your land's name exists. Fire the opening question fiercely, biting,
+  then harden into intense storytelling."* But **don't over-stress** — extreme speed (≥1.5× atempo) +
+  a "shouting" prompt over-stresses the first word; the user preferred natural pace + assertive (not
+  shouted) delivery.
+- **Pronunciation at speed:** flash female slurs rare proper nouns when sped hard. Fix at the SOURCE,
+  not by slowing: a crisp-articulation style prompt + **enunciation-space compound proper nouns**
+  (`ముల్క్-ఇ-తిలంగ్ → ముల్క్ ఇ తిలంగ్`, `తెలుంగానపురం → తెలుంగాన పురం`). Reinforce visually with a
+  key-word overlay of the same term.
+- **Edition length lever:** to hit ≤90s, either speed (`VO_X` up) OR keep the natural voice and **trim
+  the tail** (drop the spoken CTA, end on the payoff beat, add a silent on-screen end-card). The user
+  often wants BOTH a full copy and a ≤90s copy.

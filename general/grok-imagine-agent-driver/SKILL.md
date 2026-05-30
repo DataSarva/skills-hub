@@ -243,3 +243,17 @@ This pattern is what the bundled adapter is gradually moving toward. Use it when
 
 - [[frames-to-reel-ffmpeg]] — when video quota is hit, animate surviving storyboard frames into a reel with ffmpeg Ken Burns motion + crossfades.
 - [[instagram-reel-publish]] — validate + upload the final mp4 to @aisarva_ via instagrapi.
+
+## Documentary B-roll pattern (2026-05-30, Telangana reel)
+
+- **No recurring characters → skip Phase 1 ref-sheet gate.** For documentary/history reels the shots are
+  B-roll (temples, forts, crowds, inscriptions); go straight to the Phase 2 batch storyboard. Saves quota.
+- **Identify-by-frame mapping.** Clips land in arbitrary canvas order and the srcs list loses order.
+  Download all → extract one mid-frame each → **read the frames to identify content** → map to beats and
+  name `clean_clips/<name>.mp4`. Don't trust positional order.
+- **Diegetic text is fine.** The no-text guard is about caption *overlays*. Grok happily renders correct
+  in-world text on maps ("Madras Gazette 1956"), protest banners ("Jai Telangana"), and stone
+  inscriptions — keep it, it adds credibility. Only reject burned-in *subtitles/captions*.
+- **2nd B-roll batch for density.** A follow-up batch (Golconda, Kakatiya, manuscripts, …) fed the
+  multi-clip-per-beat edit for "more video, faster". Profile used: `mxtkmkyn`. ~6s 9:16, 720×1264 →
+  crop to 1080×1920.

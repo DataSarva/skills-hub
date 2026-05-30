@@ -137,3 +137,16 @@ for the VO; a single top-level looped `<Audio volume={0.16} loop>` for the music
 
 Reference implementation: `~/Downloads/insta_story/grok-cli/prahaladhudu/v3/` (`bin/tts.sh`,
 `remotion/src/Reel.tsx`, `shots.json`).
+
+## Reel comp upgrades (2026-05-30) — packaged in [[insta-reel-scaffold]] `remotion/src/Reel.tsx`
+
+- **KeyWord overlay** — centre pill (yellow-on-pink, scale+fade in) showing the primary term/synonym as
+  it's spoken; staggered under the top **Kicker**. Driven by `keyword_te` per shot; `SHOW_KEYWORDS=0`
+  omits it (kickers always stay). Arrows/bullets (→ •) render via Chromium per-glyph fallback over Noto.
+- **EndCard** — silent follow-nudge in the final beat (when the spoken CTA is cut). `endcard_te`.
+- **Multi-clip-per-beat segments** — a beat can play 2+ clips in sequence under one VO (faster cuts).
+  `gen_timeline_v2.py` emits `segments`; the comp nests a Sequence per segment.
+- **Real-clip hook + text removal + trimmer** — to start a reel on a real clip: download it, remove
+  burned-in captions (fill the letterbox bar black if the text sits on it; footage untouched), and let
+  the user trim it in the bundled local **hook_trimmer** browser UI (Range-serving HTTP server + `/cut`
+  ffmpeg endpoint → writes the trimmed mp4). Still NEVER bake Telugu text via the video model or drawtext.

@@ -74,3 +74,22 @@ Frames-to-reel without a model project: [[frames-to-reel-ffmpeg]].
 [[instagram-reel-publish]] · [[youtube-shorts-publish]]
 
 Also relevant: [[reelforge-autoresearch]] (auto-optimize the recipe), [[instasarva integration]] (Slack-driven runs).
+
+## Engine + new stages (2026-05-30, from the Telangana build)
+
+Build via the engine skill **[[insta-reel-scaffold]]** — it scaffolds the harness and runs the pipeline
+(don't hand-copy an old project). New reusable stages now in the default flow:
+
+- **Stage 0.5 — real-clip hook (pattern interrupt).** Open on a real clip making a provocative/false
+  claim, hard-cut into the rebuttal. yt-dlp the clip → remove burned-in caption (fill the letterbox bar
+  black) → trim in the bundled `hook_trimmer/` browser UI → conform → auto-prepended by `make_edition*`.
+  Big for shares/comments/completion.
+- **Key-word overlays** — show the primary terms/synonyms (centre pill) as they're spoken, staggered
+  under the top kicker (`keyword_te` per shot; `SHOW_KEYWORDS=0/1`). See [[telugu-voice-and-text]].
+- **Multi-clip-per-beat** — give long beats 2 clips for faster cuts ("more video, faster"); run a 2nd
+  B-roll batch to feed it. `clips:[...]` per shot.
+- **Edition matrix (default deliverables):** full (`VO_X≈1.25`) + 90s (faster, all beats) × male & female.
+  To hit ≤90s with the natural voice instead of speeding, **trim the tail** (drop spoken CTA, end on the
+  payoff) + add a silent `endcard_te`.
+- **Per-video reference skill** — after shipping, capture the build as a thin case-study skill (template:
+  [[telangana-video]]) so you build a `/`-callable library of past videos to take inspiration from.
